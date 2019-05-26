@@ -123,6 +123,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="clinicalData.h" />
+    <ClInclude Include="list.h" />
+    <ClInclude Include="listElem.h" />
+    <ClInclude Include="patient.h" />
+    <ClInclude Include="utils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="list.c" />
+    <ClCompile Include="listElem.c" />
+    <ClCompile Include="main.c" />
+    <ClCompile Include="utils.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="clinicalData.csv" />
+    <None Include="patients.csv" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
