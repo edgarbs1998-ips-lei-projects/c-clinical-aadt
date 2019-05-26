@@ -4,6 +4,7 @@
 #include <string.h>
 #include <stdlib.h>
 
+#include "list.h"
 #include "patient.h"
 
 char** split(char* string, int nFields, const char* delim);

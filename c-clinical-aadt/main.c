@@ -25,6 +25,7 @@ void printCommandsMenu();
 int main(int argc, char** argv) {
 
 	/* declaracao de variaveis */
+	PtList patientList = listCreate(50);
 
 	/* interpretador de comandos */
 	String command;
@@ -43,7 +44,7 @@ int main(int argc, char** argv) {
 			quit = 1; /* vai provocar a saída do interpretador */
 		}
 		else if (equalsStringIgnoreCase(command, "LOAD")) {
-			importPatientsFromFile("patients.csv");
+			importPatientsFromFile("patients.csv", "clinicalData.csv", patientList);
 		}
 		else if (equalsStringIgnoreCase(command, "CLEAR")) {
 			printf("Comando CLEAR nao implementado.\n");

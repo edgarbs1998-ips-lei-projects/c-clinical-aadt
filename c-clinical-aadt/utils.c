@@ -111,7 +111,7 @@ void importPatientsFromFile(char* fileNamePatients, char* fileNameClinicalData, 
 
 
 		Patient oldElem;
-		ListSet(patients, pos, patient1, oldElem);
+		listSet(patients, pos, patient1, &oldElem);
 
 		printf("Foram lidos %d pacientes e informação sobre %d dados clinicos \n", countPatients, clinicalDataCount);
 		fclose(f);
