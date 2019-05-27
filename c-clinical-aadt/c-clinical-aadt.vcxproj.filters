@@ -13,38 +13,68 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\tads">
+      <UniqueIdentifier>{67e0327b-5cba-4099-b139-007e16820eec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\tads">
+      <UniqueIdentifier>{ee71b953-33c2-4ea9-9d9f-ac48b1b278e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\aggregations">
+      <UniqueIdentifier>{84f41ca1-ee07-4a3c-ae92-18ad1632ff0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\aggregations">
+      <UniqueIdentifier>{99ff0c6a-2812-4b02-8c44-6a3a30958325}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\data">
+      <UniqueIdentifier>{616c67d5-6a69-45d4-a507-df9d1761b7b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\data">
+      <UniqueIdentifier>{d2dd3d28-eb68-4593-b203-b51e4b051e21}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="clinicalData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="list.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="listElem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="patient.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="info.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="avg.h">
+      <Filter>Header Files\aggregations</Filter>
+    </ClInclude>
+    <ClInclude Include="list.h">
+      <Filter>Header Files\tads</Filter>
+    </ClInclude>
+    <ClInclude Include="listElem.h">
+      <Filter>Header Files\tads</Filter>
+    </ClInclude>
+    <ClInclude Include="clinicalData.h">
+      <Filter>Header Files\data</Filter>
+    </ClInclude>
+    <ClInclude Include="patient.h">
+      <Filter>Header Files\data</Filter>
+    </ClInclude>
     <ClInclude Include="sort.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="districtAvg.h">
+      <Filter>Header Files\data</Filter>
+    </ClInclude>
+    <ClInclude Include="map.h">
+      <Filter>Header Files\tads</Filter>
+    </ClInclude>
+    <ClInclude Include="mapElem.h">
+      <Filter>Header Files\tads</Filter>
+    </ClInclude>
+    <ClInclude Include="calculateAvg.h">
+      <Filter>Header Files\data</Filter>
+    </ClInclude>
+    <ClInclude Include="stringCode.h">
+      <Filter>Header Files\tads</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="list.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="listElem.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="info.c">
@@ -53,11 +83,35 @@
     <ClCompile Include="utils.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="avg.c">
+      <Filter>Source Files\aggregations</Filter>
+    </ClCompile>
+    <ClCompile Include="list.c">
+      <Filter>Source Files\tads</Filter>
+    </ClCompile>
+    <ClCompile Include="listElem.c">
+      <Filter>Source Files\tads</Filter>
+    </ClCompile>
     <ClCompile Include="patient.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\data</Filter>
     </ClCompile>
     <ClCompile Include="sort.c">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="map.c">
+      <Filter>Source Files\tads</Filter>
+    </ClCompile>
+    <ClCompile Include="mapElem.c">
+      <Filter>Source Files\tads</Filter>
+    </ClCompile>
+    <ClCompile Include="districtAvg.c">
+      <Filter>Source Files\data</Filter>
+    </ClCompile>
+    <ClCompile Include="calculateAvg.c">
+      <Filter>Source Files\data</Filter>
+    </ClCompile>
+    <ClCompile Include="stringCode.c">
+      <Filter>Source Files\tads</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

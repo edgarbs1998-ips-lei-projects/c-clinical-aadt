@@ -14,6 +14,7 @@
 
 #include "info.h"
 #include "sort.h"
+#include "avg.h"
 
 typedef char String[255];
 
@@ -62,7 +63,7 @@ int main(int argc, char** argv) {
 			showSortMenu(patientList);
 		}
 		else if (equalsStringIgnoreCase(command, "AVG")) {
-			printf("Comando AVG nao implementado.\n");
+			averageClinicalData(patientList);
 		}
 		else if (equalsStringIgnoreCase(command, "NORM")) {
 			printf("Comando NORM nao implementado.\n");
@@ -93,10 +94,10 @@ int main(int argc, char** argv) {
 }
 
 int equalsStringIgnoreCase(char str1[], char str2[]) {
-	/* Apenas faz uma comparacao utilizando o strcmp.
-	* Necessita de modificacao para obter uma comparacao
-	* 'case insensitive' */
-	return (strcmp(str1, str2) == 0);
+	char *lstr1, *lstr2;
+	_strlwr_s(lstr1 = _strdup(str1), strlen(str1) + 1);
+	_strlwr_s(lstr2 = _strdup(str2), strlen(str2) + 1);
+	return (strcmp(lstr1, lstr2) == 0);
 }
 
 void printCommandsMenu() {

@@ -123,21 +123,33 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="avg.h" />
+    <ClInclude Include="calculateAvg.h" />
+    <ClInclude Include="districtAvg.h" />
     <ClInclude Include="clinicalData.h" />
     <ClInclude Include="info.h" />
     <ClInclude Include="list.h" />
     <ClInclude Include="listElem.h" />
+    <ClInclude Include="map.h" />
+    <ClInclude Include="mapElem.h" />
     <ClInclude Include="patient.h" />
     <ClInclude Include="sort.h" />
+    <ClInclude Include="stringCode.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="avg.c" />
+    <ClCompile Include="calculateAvg.c" />
+    <ClCompile Include="districtAvg.c" />
     <ClCompile Include="list.c" />
     <ClCompile Include="listElem.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="info.c" />
+    <ClCompile Include="map.c" />
+    <ClCompile Include="mapElem.c" />
     <ClCompile Include="patient.c" />
     <ClCompile Include="sort.c" />
+    <ClCompile Include="stringCode.c" />
     <ClCompile Include="utils.c" />
   </ItemGroup>
   <ItemGroup>

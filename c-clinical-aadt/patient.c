@@ -1,6 +1,7 @@
-#include "patient.h"
 #include <string.h>
 #include <stdio.h>
+
+#include "patient.h"
 
 Patient createPatient(int id, Date birthDate, char gender, String hospital, String district) {
 	Patient patient;
