@@ -124,6 +124,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="clinicalData.h" />
+    <ClInclude Include="info.h" />
     <ClInclude Include="list.h" />
     <ClInclude Include="listElem.h" />
     <ClInclude Include="patient.h" />
@@ -133,6 +134,8 @@
     <ClCompile Include="list.c" />
     <ClCompile Include="listElem.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="patient.c" />
+    <ClCompile Include="info.c" />
     <ClCompile Include="utils.c" />
   </ItemGroup>
   <ItemGroup>

@@ -1,14 +1,8 @@
 #pragma once
 
+#include "list.h"
+#include "utils.h"
 #include "clinicalData.h"
-
-typedef struct date {
-	int day;
-	int month;
-	int year;
-} Date;
-
-typedef char String[255];
 
 typedef struct patient {
 	int id; /*Número que identifica um paciente */
@@ -19,4 +13,6 @@ typedef struct patient {
 	ClinicalData clinicalData; /*Dados clínicos do doente (médias)*/
 } Patient;
 
-typedef struct Patient* PtPatient;
+Patient createPatient(int id, Date birthDate, char gender, String hospital, String district);
+int findPatientById(PtList list, int id, Patient* patient1, int* pos);
+void printPatient(Patient patient);

@@ -10,7 +10,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <locale.h>
-#include "utils.h"
+
+#include "info.h"
 
 typedef char String[255];
 

@@ -1,6 +1,7 @@
-#include "list.h"
 #include <stdio.h>
 #include <stdlib.h>
+
+#include "list.h"
 
 typedef struct listImpl {
 	ListElem* elements;

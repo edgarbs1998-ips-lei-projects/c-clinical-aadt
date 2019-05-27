@@ -1,15 +1,12 @@
 #pragma once
 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+typedef struct date {
+	int day;
+	int month;
+	int year;
+} Date;
 
-#include "list.h"
-#include "patient.h"
+typedef char String[255];
 
 char** split(char* string, int nFields, const char* delim);
-void importPatientsFromFile(char* filename, char* fileNameClinicalData, PtList patients);
-Patient createPatient(int id, Date birthDate, char gender, String hospital, String district);
 Date dateCreate(int day, int month, int year);
-void printPatient(PtPatient patient);
-int findPatientById(PtList list, int id, Patient* patient1, int* pos);
