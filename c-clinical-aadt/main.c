@@ -57,7 +57,7 @@ int main(int argc, char** argv) {
 			showData(patientList);
 		}
 		else if (equalsStringIgnoreCase(command, "SORT")) {
-			sortByHospital(patientList);
+			sortByDistrict(patientList);
 		}
 		else if (equalsStringIgnoreCase(command, "AVG")) {
 			printf("Comando AVG nao implementado.\n");
