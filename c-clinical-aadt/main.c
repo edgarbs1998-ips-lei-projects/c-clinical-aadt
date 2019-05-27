@@ -11,7 +11,9 @@
 #include <string.h>
 #include <locale.h>
 
+
 #include "info.h"
+#include "sort.h"
 
 typedef char String[255];
 
@@ -57,7 +59,7 @@ int main(int argc, char** argv) {
 			showData(patientList);
 		}
 		else if (equalsStringIgnoreCase(command, "SORT")) {
-			sortByDistrict(patientList);
+			showSortMenu(patientList);
 		}
 		else if (equalsStringIgnoreCase(command, "AVG")) {
 			printf("Comando AVG nao implementado.\n");
@@ -101,7 +103,7 @@ void printCommandsMenu() {
 	printf("\n===================================================================================");
 	printf("\n                          PROJECT: Patients and Clinical Data                      ");
 	printf("\n===================================================================================");
-	printf("\nA. Info about players (LOAD, SHOW, CLEAR).");
+	printf("\nA. Info about Patients (LOAD, SHOW, CLEAR).");
 	printf("\nB. Aggregated info about patients and clinical data (SORT, AVG, NORM, QUEUE, CHECKDISTRICT).");
 	printf("\nC. Advanced indicator (LOADT, NORMT, NEURALNET)");
 	printf("\nD. Exit (QUIT)\n\n");

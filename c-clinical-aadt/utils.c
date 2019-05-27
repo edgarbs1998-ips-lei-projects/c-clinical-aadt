@@ -30,10 +30,20 @@ Date dateCreate(int day, int month, int year) {
 	return date;
 }
 
-void swap(int *a, int *b)
+
+int date_cmp(Date d1, Date d2)
 
 {
-	int t = *a;
-	*a = *b;
-	*b = t;
+
+	if (d1.day == d2.day && d1.month == d2.month && d1.year == d2.year)
+
+		return 0;
+
+	else if (d1.year > d2.year || d1.year == d2.year && d1.month > d2.month || d1.year == d2.year && d1.month == d2.month && d1.day > d2.day)
+
+		return 1;
+
+	else return -1;
+
 }
+

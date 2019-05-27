@@ -1,6 +1,12 @@
-#include "sort.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-// SORT BY BIRTHDATE
+#include "sort.h"
+#include "utils.h"
+
+
+//Sort by birthdate
 void sortByBirthDate(PtList list) {
 	int size = 0;
 	ListElem elem;
@@ -13,14 +19,14 @@ void sortByBirthDate(PtList list) {
 
 	int size2 = 0;
 	listSize(auxList, &size2);
-	bubbleSortDate(auxList, size2);
+	bubbleSortBirthDate(auxList, size2);
 
 	listPrint(auxList);
 }
 
 
-
-void bubbleSortDate(PtList list, int listSize) {
+//bubble sort
+void bubbleSortBirthDate(PtList list, int listSize) {
 
 	ListElem elem1;
 	ListElem elem2;
@@ -42,24 +48,7 @@ void bubbleSortDate(PtList list, int listSize) {
 	}
 }
 
-int date_cmp(Date d1, Date d2)
-
-{
-
-	if (d1.day == d2.day && d1.month == d2.month && d1.year == d2.year)
-
-		return 0;
-
-	else if (d1.year > d2.year || d1.year == d2.year && d1.month > d2.month || d1.year == d2.year && d1.month == d2.month && d1.day > d2.day)
-
-		return 1;
-
-	else return -1;
-
-}
-
-// SORT BY HOSPITAL
-
+//Sort by hospital
 void sortByHospital(PtList list) {
 	int size = 0;
 	ListElem elem;
@@ -77,6 +66,7 @@ void sortByHospital(PtList list) {
 	listPrint(auxList);
 }
 
+//bubble sort
 void bubbleSortHospital(PtList list, int listSize) {
 
 	ListElem elem1;
@@ -109,6 +99,7 @@ void bubbleSortHospital(PtList list, int listSize) {
 	}
 }
 
+//Sort by district
 void sortByDistrict(PtList list) {
 	int size = 0;
 	ListElem elem;
@@ -126,6 +117,7 @@ void sortByDistrict(PtList list) {
 	listPrint(auxList);
 }
 
+//buble sort
 void bubbleSortDistrict(PtList list, int listSize) {
 
 	ListElem elem1;
@@ -155,5 +147,33 @@ void bubbleSortDistrict(PtList list, int listSize) {
 
 			}
 		}
+	}
+}
+
+// Sort menu
+void showSortMenu(PtList list) {
+	String command;
+	int option;
+	printf("\n===================================================================================");
+	printf("\n                                        SORT                                       ");
+	printf("\n===================================================================================");
+	printf("\n0 - Ordenar por data de nascimento");
+	printf("\n1 - Ordenar por hospital");
+	printf("\n2 - Ordenar por distrito");
+	printf("\nOption> ");
+
+	fgets(command, sizeof(command), stdin);
+	command[strlen(command) - 1] = '\0';
+	option = atoi(command);
+
+	switch (option)
+	{
+	case 0: sortByBirthDate(list);
+		break;
+	case 1: sortByHospital(list);
+		break;
+	case 2: sortByDistrict(list);
+		break;
+	default: showSortMenu(list);
 	}
 }
