@@ -1,10 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "list.h"
 #include "patient.h"
 #include "info.h"
 
+
+
+//LOAD
 void importPatientsFromFile(char* fileNamePatients, char* fileNameClinicalData, PtList patients) {
 	FILE* f;
 	int error = fopen_s(&f, fileNamePatients, "r"); //opens the file in read mode
@@ -44,6 +48,7 @@ void importPatientsFromFile(char* fileNamePatients, char* fileNameClinicalData, 
 		countPatients++;
 	}
 
+
 	FILE* f2;
 	int error2 = fopen_s(&f2, fileNameClinicalData, "r"); //opens the file in read mode
 
@@ -81,14 +86,11 @@ void importPatientsFromFile(char* fileNamePatients, char* fileNameClinicalData, 
 		sscanf_s(tokens[1], "%d/%d/%d", &day, &month, &year);
 		Date registDate = dateCreate(day, month, year);
 
-		//patient1.clinicalData.age = registDate - birthDate;
+		patient1.clinicalData.age = (float) getAge(registDate, patient1.birthdate);
 		patient1.clinicalData.bmi = incrementalAverage(patient1.clinicalData.bmi, patient1.clinicalData.clinicalDataCount, (float)atof(tokens[2]));
-
-		int patientAge = atoi(tokens[2]);
-		float bmi = (float)atof(tokens[3]);
-		float glucose = (float)atof(tokens[4]);
-		float insulin = (float)atof(tokens[5]);
-		float mcp1 = (float)atof(tokens[6]);
+		patient1.clinicalData.glucose = incrementalAverage(patient1.clinicalData.glucose, patient1.clinicalData.clinicalDataCount, (float)atof(tokens[3]));
+		patient1.clinicalData.insulin = incrementalAverage(patient1.clinicalData.insulin, patient1.clinicalData.clinicalDataCount, (float)atof(tokens[4]));
+		patient1.clinicalData.mcp1 = incrementalAverage(patient1.clinicalData.mcp1, patient1.clinicalData.clinicalDataCount, (float)atof(tokens[5]));
 
 
 		clinicalDataCount++;
@@ -96,18 +98,172 @@ void importPatientsFromFile(char* fileNamePatients, char* fileNameClinicalData, 
 
 		Patient oldElem;
 		listSet(patients, pos, patient1, &oldElem);
-
-		printf("Foram lidos %d pacientes e informação sobre %d dados clinicos \n", countPatients, clinicalDataCount);
-		fclose(f);
+		
 	}
+	fclose(f2);
+	printf("Foram lidos %d pacientes e informação sobre %d dados clinicos \n", countPatients, clinicalDataCount);
 }
 
 float incrementalAverage(float avg_n, int n, float v_n1) {
 	if (n == 0) {
 		return v_n1;
 	}
-	else {
+
+	return (avg_n*n + v_n1) / n + 1;
+}
 
 
+
+int findPatientById(PtList list, int id, Patient* patient, int* pos) {
+	int size;
+	listSize(list, &size);
+	for (int i = 0; i < size; i++) {
+		listGet(list, i, patient);
+		if (patient->id == id) {
+			*pos = i;
+			return 1;
+		}
+	}
+	return 0;
+}
+
+
+int getAge(Date actualdate, Date birthdate) {
+	int age = actualdate.year - birthdate.year;
+	if (actualdate.month < birthdate.month)
+		age--;
+	else if (actualdate.month == birthdate.month) {
+		if (actualdate.day < birthdate.day)
+			age--;
+	}
+	return age;
+}
+
+//CLEAR
+void clearData(PtList *list) {
+	int size;
+	listSize(*list, &size);
+	printf("Foram apagados %d registos de pacientes\n", size);
+	listDestroy(list);
+}
+
+//SHOW
+void showData(PtList list) {
+	if (listIsEmpty(list)) {
+	}
+	listPrint(list);
+}
+
+// QUIT
+void QuitProgram(PtList list) {
+	int size;
+	listSize(list, &size);
+	if (size > 0) {	
+	listDestroy(&list);
+	}
+	exit(0);
+}
+
+// SORT BY BIRTHDATE
+void sortByBirthDate(PtList list) {
+	int size = 0;
+	ListElem elem;
+	PtList auxList = listCreate(10);
+	listSize(list, &size);
+	for (int i = 0; i < size; i++) {
+		listGet(list, i, &elem);
+		listAdd(auxList, i, elem);
+	}
+
+	int size2 = 0;
+	listSize(auxList, &size2);
+	bubbleSortDate(auxList, size2);
+
+	listPrint(auxList);
+}
+
+
+
+void bubbleSortDate(PtList list,  int listSize) {
+	
+	ListElem elem1;
+	ListElem elem2;
+
+	for (unsigned int i = 0; i < listSize; i++) {
+		for (unsigned int j = 0; j < listSize - i - 1; j++) {
+
+			listGet(list, j, &elem1);
+			listGet(list, j+1, &elem2);
+			
+			int cmp = date_cmp(elem1.birthdate,elem2.birthdate);
+
+			if (cmp > 0 ){
+
+				listSet(list, j+1, elem1, &elem2);
+				listSet(list, j, elem2, &elem1);
+			}
+		}
 	}
 }
+
+int date_cmp(Date d1, Date d2)
+
+{
+
+	if (d1.day == d2.day && d1.month == d2.month && d1.year == d2.year)
+
+		return 0;
+
+	else if (d1.year > d2.year || d1.year == d2.year && d1.month > d2.month || d1.year == d2.year && d1.month == d2.month && d1.day > d2.day)
+
+		return 1;
+
+	else return -1;
+
+}
+
+// SORT BY HOSPITAL
+
+void sortByHospital(PtList list) {
+	int size = 0;
+	ListElem elem;
+	PtList auxList = listCreate(10);
+	listSize(list, &size);
+	for (int i = 0; i < size; i++) {
+		listGet(list, i, &elem);
+		listAdd(auxList, i, elem);
+	}
+
+	int size2 = 0;
+	listSize(auxList, &size2);
+	bubbleSortHospital(auxList, size2);
+
+	listPrint(auxList);
+}
+
+void bubbleSortHospital(PtList list, int listSize) {
+
+	ListElem elem1;
+	ListElem elem2;
+	String temp;
+
+	for (unsigned int i = 0; i < listSize; i++) {
+		for (unsigned int j = 0; j < listSize - i - 1; j++) {
+
+			listGet(list, j, &elem1);
+			listGet(list, j + 1, &elem2);
+
+			if (strcmp(elem1.hospital, elem2.hospital ) > 0)
+				
+			{
+				listSet(list, j + 1, elem1, &elem2);
+				listSet(list, j, elem2, &elem1);
+			}
+		}
+	}
+}
+
+// AVG
+// pegar na lista atual, meter em cada distrito e fazer as medias por distrito
+
+// CHECKDISTRICT Usar tad map ( district, info)

@@ -26,7 +26,7 @@ void printCommandsMenu();
 int main(int argc, char** argv) {
 
 	/* declaracao de variaveis */
-	PtList patientList = listCreate(50);
+	PtList patientList = listCreate(10);
 
 	/* interpretador de comandos */
 	String command;
@@ -42,19 +42,22 @@ int main(int argc, char** argv) {
 		command[strlen(command) - 1] = '\0';
 
 		if (equalsStringIgnoreCase(command, "QUIT")) {
-			quit = 1; /* vai provocar a saída do interpretador */
+			/* vai provocar a saída do interpretador */
+			quit = 1;
+			QuitProgram(patientList);
 		}
 		else if (equalsStringIgnoreCase(command, "LOAD")) {
 			importPatientsFromFile("patients.csv", "clinicalData.csv", patientList);
 		}
 		else if (equalsStringIgnoreCase(command, "CLEAR")) {
-			printf("Comando CLEAR nao implementado.\n");
+			clearData(&patientList);
 		}
 		else if (equalsStringIgnoreCase(command, "SHOW")) {
-			printf("Comando SHOW nao implementado.\n");
+			printf("Indice BirthDate Sex Hospital District Age Bmi Glicose Insulin Mpc1\n");
+			showData(patientList);
 		}
 		else if (equalsStringIgnoreCase(command, "SORT")) {
-			printf("Comando SORT nao implementado.\n");
+			sortByHospital(patientList);
 		}
 		else if (equalsStringIgnoreCase(command, "AVG")) {
 			printf("Comando AVG nao implementado.\n");

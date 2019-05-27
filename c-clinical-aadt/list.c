@@ -69,19 +69,24 @@ LIST_OK em caso de sucesso;
 */
 int listAdd(PtList list, int rank, ListElem elem) { // O(n)
 	if (list == NULL) return LIST_NULL;
-	if (list->size == list->capacity) return LIST_FULL;
-
 	if (rank < 0 || rank > list->size) return LIST_INVALID_RANK;
+	/* melhorar com realocação do array 'elements': */
+	if (list->size == list->capacity) {
+		ListElem *newElements = (ListElem *)realloc(list->elements,
+			(list->capacity + 1) * sizeof(ListElem));
 
-	//que algoritmo do arrayList ?! -> insertAtOrdered
+		if (newElements == NULL) return LIST_NO_MEMORY;
+
+		list->elements = newElements;
+		list->capacity += 1;
+	}
+
 	for (int i = list->size; i > rank; i--) {
 		list->elements[i] = list->elements[i - 1];
 	}
 
 	list->elements[rank] = elem;
-
 	list->size++;
-
 	return LIST_OK;
 }
 
@@ -191,7 +196,7 @@ void listPrint(PtList list) {
 		printf("LIST EMPTY \n");
 	else {
 		for (int rank = 0; rank < list->size; rank++) {
-			printf("Rank %d : ", rank);
+			printf("At Rank %d: ", rank);
 			listElemPrint(list->elements[rank]);
 		}
 	}

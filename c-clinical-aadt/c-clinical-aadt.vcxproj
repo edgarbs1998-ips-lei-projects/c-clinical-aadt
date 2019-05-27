@@ -134,8 +134,8 @@
     <ClCompile Include="list.c" />
     <ClCompile Include="listElem.c" />
     <ClCompile Include="main.c" />
-    <ClCompile Include="patient.c" />
     <ClCompile Include="info.c" />
+    <ClCompile Include="patient.c" />
     <ClCompile Include="utils.c" />
   </ItemGroup>
   <ItemGroup>

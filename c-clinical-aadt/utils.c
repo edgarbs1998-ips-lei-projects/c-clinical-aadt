@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <string.h>
 
 #include "utils.h"
 
@@ -27,4 +28,12 @@ Date dateCreate(int day, int month, int year) {
 	date.year = year;
 
 	return date;
+}
+
+void swap(int *a, int *b)
+
+{
+	int t = *a;
+	*a = *b;
+	*b = t;
 }
