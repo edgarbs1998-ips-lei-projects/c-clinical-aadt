@@ -125,29 +125,41 @@
   <ItemGroup>
     <ClInclude Include="avg.h" />
     <ClInclude Include="calculateAvg.h" />
+    <ClInclude Include="date.h" />
+    <ClInclude Include="minMax.h" />
+    <ClInclude Include="queueAvg.h" />
+    <ClInclude Include="checkDistrict.h" />
     <ClInclude Include="districtAvg.h" />
     <ClInclude Include="clinicalData.h" />
     <ClInclude Include="info.h" />
-    <ClInclude Include="list.h" />
+    <ClInclude Include="listTad.h" />
     <ClInclude Include="listElem.h" />
-    <ClInclude Include="map.h" />
+    <ClInclude Include="mapTad.h" />
     <ClInclude Include="mapElem.h" />
     <ClInclude Include="patient.h" />
+    <ClInclude Include="queue.h" />
+    <ClInclude Include="queueTad.h" />
+    <ClInclude Include="queueElem.h" />
     <ClInclude Include="sort.h" />
+    <ClInclude Include="string.h" />
     <ClInclude Include="stringCode.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="avg.c" />
     <ClCompile Include="calculateAvg.c" />
+    <ClCompile Include="checkDistrict.c" />
+    <ClCompile Include="queue.c" />
     <ClCompile Include="districtAvg.c" />
-    <ClCompile Include="list.c" />
+    <ClCompile Include="listTad.c" />
     <ClCompile Include="listElem.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="info.c" />
-    <ClCompile Include="map.c" />
+    <ClCompile Include="mapTad.c" />
     <ClCompile Include="mapElem.c" />
     <ClCompile Include="patient.c" />
+    <ClCompile Include="queueTad.c" />
+    <ClCompile Include="queueElem.c" />
     <ClCompile Include="sort.c" />
     <ClCompile Include="stringCode.c" />
     <ClCompile Include="utils.c" />

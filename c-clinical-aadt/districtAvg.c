@@ -16,5 +16,6 @@ DistrictAvg createDistrictAvg(float age, float bmi, float glucose, float insulin
 }
 
 void printDistrictAvg(DistrictAvg* districtAvg) {
-	printf("DistrictAvg {age: %.2f, mbi: %.2f, glucose: %.2f, insulin: %.2f, mcp1: %.2f} \n", districtAvg->age, districtAvg->bmi, districtAvg->glucose, districtAvg->insulin, districtAvg->mcp1);
+	printf("%4.1f %7.4f %3.0f %7.4f %9.4f\n",
+		districtAvg->age, districtAvg->bmi, districtAvg->glucose, districtAvg->insulin, districtAvg->mcp1);
 }

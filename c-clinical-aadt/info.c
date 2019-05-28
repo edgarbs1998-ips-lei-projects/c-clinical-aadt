@@ -2,11 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "list.h"
-#include "patient.h"
 #include "info.h"
-
-
+#include "listTad.h"
+#include "patient.h"
+#include "utils.h"
 
 //LOAD
 void importPatientsFromFile(char* fileNamePatients, char* fileNameClinicalData, PtList patients) {
@@ -26,6 +25,8 @@ void importPatientsFromFile(char* fileNamePatients, char* fileNameClinicalData, 
 	while (fgets(nextLine, sizeof(nextLine), f)) {
 		if (strlen(nextLine) < 1)
 			continue;
+
+		nextLine[strlen(nextLine) - 1] = '\0';
 
 		char** tokens = split(nextLine, 5, ";");
 		//tokens[0] - id
@@ -62,6 +63,8 @@ void importPatientsFromFile(char* fileNamePatients, char* fileNameClinicalData, 
 	while (fgets(nextLine2, sizeof(nextLine2), f2)) {
 		if (strlen(nextLine2) < 1)
 			continue;
+		
+		nextLine[strlen(nextLine2) - 1] = '\0';
 
 		char** tokens = split(nextLine2, 6, ";");
 		//tokens[0] - id
@@ -112,8 +115,6 @@ float incrementalAverage(float avg_n, int n, float v_n1) {
 	return (avg_n*n + v_n1) / n + 1;
 }
 
-
-
 int findPatientById(PtList list, int id, Patient* patient, int* pos) {
 	int size;
 	listSize(list, &size);
@@ -145,6 +146,8 @@ void clearData(PtList *list) {
 	listSize(*list, &size);
 	printf("Foram apagados %d registos de pacientes\n", size);
 	listDestroy(list);
+
+	// TODO After CLEAR command LOAD not working
 }
 
 //SHOW
@@ -163,12 +166,3 @@ void QuitProgram(PtList list) {
 	}
 	exit(0);
 }
-
-
-
-
-
-// AVG
-// pegar na lista atual, meter em cada distrito e fazer as medias por distrito
-
-// CHECKDISTRICT Usar tad map ( district, info)

@@ -17,7 +17,7 @@ Patient createPatient(int id, Date birthDate, char gender, String hospital, Stri
 
 void printPatient(Patient patient) {
 	
-	printf("%d | %02d/%02d/%2d | %c | %-20s | %-18s | %2.0f | %7.4f | %5.1f | %7.4f | %8.5f \n", 
+	printf("%3d %02d/%02d/%2d %c %-37s %-18s %2.0f %7.4f %5.1f %7.4f %9.4f\n", 
 		patient.id, patient.birthdate.day, patient.birthdate.month, patient.birthdate.year,
 		patient.gender, patient.hospital, patient.district, patient.clinicalData.age,patient.clinicalData.bmi,
 		patient.clinicalData.glucose,patient.clinicalData.insulin,patient.clinicalData.mcp1);

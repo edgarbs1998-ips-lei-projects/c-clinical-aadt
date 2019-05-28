@@ -1,6 +1,6 @@
 #pragma once
 
-#include "utils.h"
+#include "string.h"
 
 typedef struct stringCode {
 	String code; //a alocação TEM DE SER ESTÁTICA

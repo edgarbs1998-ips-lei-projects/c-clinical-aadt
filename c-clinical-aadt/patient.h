@@ -1,6 +1,7 @@
 #pragma once
 
-#include "utils.h"
+#include "date.h"
+#include "string.h"
 #include "clinicalData.h"
 
 typedef struct patient {

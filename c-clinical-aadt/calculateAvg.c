@@ -1,6 +1,6 @@
 #include "calculateAvg.h"
 
-CalculateAvg createCalculateAvg() {
+CalculateAvg initializeCalculateAvg() {
 	CalculateAvg calculateAvg;
 
 	calculateAvg.sumAge = 0.0;

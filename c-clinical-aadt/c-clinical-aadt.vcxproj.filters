@@ -42,9 +42,6 @@
     <ClInclude Include="avg.h">
       <Filter>Header Files\aggregations</Filter>
     </ClInclude>
-    <ClInclude Include="list.h">
-      <Filter>Header Files\tads</Filter>
-    </ClInclude>
     <ClInclude Include="listElem.h">
       <Filter>Header Files\tads</Filter>
     </ClInclude>
@@ -54,14 +51,8 @@
     <ClInclude Include="patient.h">
       <Filter>Header Files\data</Filter>
     </ClInclude>
-    <ClInclude Include="sort.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="districtAvg.h">
       <Filter>Header Files\data</Filter>
-    </ClInclude>
-    <ClInclude Include="map.h">
-      <Filter>Header Files\tads</Filter>
     </ClInclude>
     <ClInclude Include="mapElem.h">
       <Filter>Header Files\tads</Filter>
@@ -71,6 +62,39 @@
     </ClInclude>
     <ClInclude Include="stringCode.h">
       <Filter>Header Files\tads</Filter>
+    </ClInclude>
+    <ClInclude Include="sort.h">
+      <Filter>Header Files\aggregations</Filter>
+    </ClInclude>
+    <ClInclude Include="checkDistrict.h">
+      <Filter>Header Files\aggregations</Filter>
+    </ClInclude>
+    <ClInclude Include="queueElem.h">
+      <Filter>Header Files\tads</Filter>
+    </ClInclude>
+    <ClInclude Include="listTad.h">
+      <Filter>Header Files\tads</Filter>
+    </ClInclude>
+    <ClInclude Include="mapTad.h">
+      <Filter>Header Files\tads</Filter>
+    </ClInclude>
+    <ClInclude Include="queueTad.h">
+      <Filter>Header Files\tads</Filter>
+    </ClInclude>
+    <ClInclude Include="queue.h">
+      <Filter>Header Files\aggregations</Filter>
+    </ClInclude>
+    <ClInclude Include="queueAvg.h">
+      <Filter>Header Files\data</Filter>
+    </ClInclude>
+    <ClInclude Include="minMax.h">
+      <Filter>Header Files\data</Filter>
+    </ClInclude>
+    <ClInclude Include="date.h">
+      <Filter>Header Files\data</Filter>
+    </ClInclude>
+    <ClInclude Include="string.h">
+      <Filter>Header Files\data</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -86,20 +110,11 @@
     <ClCompile Include="avg.c">
       <Filter>Source Files\aggregations</Filter>
     </ClCompile>
-    <ClCompile Include="list.c">
-      <Filter>Source Files\tads</Filter>
-    </ClCompile>
     <ClCompile Include="listElem.c">
       <Filter>Source Files\tads</Filter>
     </ClCompile>
     <ClCompile Include="patient.c">
       <Filter>Source Files\data</Filter>
-    </ClCompile>
-    <ClCompile Include="sort.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="map.c">
-      <Filter>Source Files\tads</Filter>
     </ClCompile>
     <ClCompile Include="mapElem.c">
       <Filter>Source Files\tads</Filter>
@@ -112,6 +127,27 @@
     </ClCompile>
     <ClCompile Include="stringCode.c">
       <Filter>Source Files\tads</Filter>
+    </ClCompile>
+    <ClCompile Include="queueElem.c">
+      <Filter>Source Files\tads</Filter>
+    </ClCompile>
+    <ClCompile Include="sort.c">
+      <Filter>Source Files\aggregations</Filter>
+    </ClCompile>
+    <ClCompile Include="checkDistrict.c">
+      <Filter>Source Files\aggregations</Filter>
+    </ClCompile>
+    <ClCompile Include="listTad.c">
+      <Filter>Source Files\tads</Filter>
+    </ClCompile>
+    <ClCompile Include="mapTad.c">
+      <Filter>Source Files\tads</Filter>
+    </ClCompile>
+    <ClCompile Include="queueTad.c">
+      <Filter>Source Files\tads</Filter>
+    </ClCompile>
+    <ClCompile Include="queue.c">
+      <Filter>Source Files\aggregations</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

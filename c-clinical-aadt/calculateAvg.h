@@ -19,7 +19,7 @@ typedef struct calculateAvg {
 	int countMcp1;
 } CalculateAvg;
 
-CalculateAvg createCalculateAvg();
+CalculateAvg initializeCalculateAvg();
 void addAgeToAvgCalculate(CalculateAvg* calculateAvg, float age);
 void addBmiToAvgCalculate(CalculateAvg* calculateAvg, float bmi);
 void addGlucoseToAvgCalculate(CalculateAvg* calculateAvg, float glucose);

@@ -11,12 +11,12 @@
 #include <string.h>
 #include <locale.h>
 
-
+#include "string.h"
 #include "info.h"
 #include "sort.h"
 #include "avg.h"
-
-typedef char String[255];
+#include "queue.h"
+#include "checkDistrict.h"
 
 /* definicao de prototipos de funcoes, definidas depois do main() */
 int equalsStringIgnoreCase(char str1[], char str2[]);
@@ -56,7 +56,8 @@ int main(int argc, char** argv) {
 			clearData(&patientList);
 		}
 		else if (equalsStringIgnoreCase(command, "SHOW")) {
-			printf("Indice BirthDate Sex Hospital District Age Bmi Glicose Insulin Mpc1\n");
+			printf("%18s %s %s %s %37s %12s %s %9s %s %s\n",
+				"Indice", "BirthDate", "Sex", "Hospital", "District", "Age", "Bmi", "Glicose", "Insulin", "Mpc1");
 			showData(patientList);
 		}
 		else if (equalsStringIgnoreCase(command, "SORT")) {
@@ -69,10 +70,10 @@ int main(int argc, char** argv) {
 			printf("Comando NORM nao implementado.\n");
 		}
 		else if (equalsStringIgnoreCase(command, "QUEUE")) {
-			printf("Comando QUEUE nao implementado.\n");
+			queuePatients(patientList);
 		}
 		else if (equalsStringIgnoreCase(command, "CHECKDISTRICT")) {
-			printf("Comando CHECKDISTRICT nao implementado.\n");
+			showCheckDistrictMenu(patientList);
 		}
 		else if (equalsStringIgnoreCase(command, "LOADT")) {
 			printf("Comando MFOULG nao implementado.\n");
@@ -91,13 +92,6 @@ int main(int argc, char** argv) {
 	/* libertar memória e apresentar mensagem de saída. */
 
 	return (EXIT_SUCCESS);
-}
-
-int equalsStringIgnoreCase(char str1[], char str2[]) {
-	char *lstr1, *lstr2;
-	_strlwr_s(lstr1 = _strdup(str1), strlen(str1) + 1);
-	_strlwr_s(lstr2 = _strdup(str2), strlen(str2) + 1);
-	return (strcmp(lstr1, lstr2) == 0);
 }
 
 void printCommandsMenu() {

@@ -3,23 +3,23 @@
 #include <string.h>
 
 #include "sort.h"
+#include "string.h"
 #include "utils.h"
 
 
 //Sort by birthdate
 void sortByBirthDate(PtList list) {
-	int size = 0;
-	ListElem elem;
-	PtList auxList = listCreate(10);
+	int size;
 	listSize(list, &size);
-	for (int i = 0; i < size; i++) {
+	PtList auxList = listCreate(size);
+
+	ListElem elem;
+	for (int i = 0; i < size; ++i) {
 		listGet(list, i, &elem);
 		listAdd(auxList, i, elem);
 	}
 
-	int size2 = 0;
-	listSize(auxList, &size2);
-	bubbleSortBirthDate(auxList, size2);
+	bubbleSortBirthDate(auxList, size);
 
 	listPrint(auxList);
 }
@@ -31,13 +31,13 @@ void bubbleSortBirthDate(PtList list, int listSize) {
 	ListElem elem1;
 	ListElem elem2;
 
-	for (unsigned int i = 0; i < listSize; i++) {
-		for (unsigned int j = 0; j < listSize - i - 1; j++) {
+	for (int i = 0; i < listSize; i++) {
+		for (int j = 0; j < listSize - i - 1; j++) {
 
 			listGet(list, j, &elem1);
 			listGet(list, j + 1, &elem2);
 
-			int cmp = date_cmp(elem1.birthdate, elem2.birthdate);
+			int cmp = dateCmp(elem1.birthdate, elem2.birthdate);
 
 			if (cmp > 0) {
 
@@ -72,8 +72,8 @@ void bubbleSortHospital(PtList list, int listSize) {
 	ListElem elem1;
 	ListElem elem2;
 
-	for (unsigned int i = 0; i < listSize; i++) {
-		for (unsigned int j = 0; j < listSize - i - 1; j++) {
+	for (int i = 0; i < listSize; i++) {
+		for (int j = 0; j < listSize - i - 1; j++) {
 
 			listGet(list, j, &elem1);
 			listGet(list, j + 1, &elem2);
@@ -87,7 +87,7 @@ void bubbleSortHospital(PtList list, int listSize) {
 
 			if (strcmp(elem1.hospital, elem2.hospital) == 0) {
 
-				int cmp = date_cmp(elem1.birthdate, elem2.birthdate);
+				int cmp = dateCmp(elem1.birthdate, elem2.birthdate);
 
 				if (cmp > 0) {
 
@@ -123,8 +123,8 @@ void bubbleSortDistrict(PtList list, int listSize) {
 	ListElem elem1;
 	ListElem elem2;
 
-	for (unsigned int i = 0; i < listSize; i++) {
-		for (unsigned int j = 0; j < listSize - i - 1; j++) {
+	for (int i = 0; i < listSize; i++) {
+		for (int j = 0; j < listSize - i - 1; j++) {
 
 			listGet(list, j, &elem1);
 			listGet(list, j + 1, &elem2);
@@ -165,6 +165,8 @@ void showSortMenu(PtList list) {
 	fgets(command, sizeof(command), stdin);
 	command[strlen(command) - 1] = '\0';
 	option = atoi(command);
+
+	// TODO Keep sort menu after execution
 
 	switch (option)
 	{
