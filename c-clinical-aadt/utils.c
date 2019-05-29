@@ -137,3 +137,5 @@ void getMinMax(PtList list, int listSize, MinMax *minMax) {
 		}
 	}
 }
+
+

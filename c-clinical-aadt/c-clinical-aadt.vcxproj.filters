@@ -96,6 +96,9 @@
     <ClInclude Include="string.h">
       <Filter>Header Files\data</Filter>
     </ClInclude>
+    <ClInclude Include="norm.h">
+      <Filter>Header Files\aggregations</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c">
@@ -149,6 +152,12 @@
     <ClCompile Include="queue.c">
       <Filter>Source Files\aggregations</Filter>
     </ClCompile>
+    <ClCompile Include="norm.c">
+      <Filter>Source Files\aggregations</Filter>
+    </ClCompile>
+    <ClCompile Include="loadT.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="clinicalData.csv">
@@ -156,6 +165,15 @@
     </None>
     <None Include="patients.csv">
       <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\..\..\..\..\Downloads\patients_train.csv">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\..\..\..\..\Downloads\clinicalData_train.csv">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="loadT.h">
+      <Filter>Header Files</Filter>
     </None>
   </ItemGroup>
 </Project>

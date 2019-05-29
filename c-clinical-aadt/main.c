@@ -17,6 +17,8 @@
 #include "avg.h"
 #include "queue.h"
 #include "checkDistrict.h"
+#include "norm.h"
+#include "loadT.h"
 
 /* definicao de prototipos de funcoes, definidas depois do main() */
 int equalsStringIgnoreCase(char str1[], char str2[]);
@@ -30,6 +32,7 @@ int main(int argc, char** argv) {
 
 	/* declaracao de variaveis */
 	PtList patientList = listCreate(10);
+	PtList neuralNetList = listCreate(10);
 
 	/* interpretador de comandos */
 	String command;
@@ -67,7 +70,7 @@ int main(int argc, char** argv) {
 			averageClinicalData(patientList);
 		}
 		else if (equalsStringIgnoreCase(command, "NORM")) {
-			printf("Comando NORM nao implementado.\n");
+			listNormPrint(normalizeClinicalData(patientList));
 		}
 		else if (equalsStringIgnoreCase(command, "QUEUE")) {
 			queuePatients(patientList);
@@ -76,7 +79,7 @@ int main(int argc, char** argv) {
 			showCheckDistrictMenu(patientList);
 		}
 		else if (equalsStringIgnoreCase(command, "LOADT")) {
-			printf("Comando MFOULG nao implementado.\n");
+			importPatientsFromFile("patients_train.csv", "clinicalData_train.csv", neuralNetList);
 		}
 		else if (equalsStringIgnoreCase(command, "NORMT")) {
 			printf("Comando NORMT nao implementado.\n");

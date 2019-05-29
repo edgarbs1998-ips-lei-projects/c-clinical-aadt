@@ -15,3 +15,4 @@ typedef struct patient {
 
 Patient createPatient(int id, Date birthDate, char gender, String hospital, String district);
 void printPatient(Patient patient);
+void printNormPatient(Patient patient);

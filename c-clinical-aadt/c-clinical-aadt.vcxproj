@@ -127,6 +127,7 @@
     <ClInclude Include="calculateAvg.h" />
     <ClInclude Include="date.h" />
     <ClInclude Include="minMax.h" />
+    <ClInclude Include="norm.h" />
     <ClInclude Include="queueAvg.h" />
     <ClInclude Include="checkDistrict.h" />
     <ClInclude Include="districtAvg.h" />
@@ -149,6 +150,8 @@
     <ClCompile Include="avg.c" />
     <ClCompile Include="calculateAvg.c" />
     <ClCompile Include="checkDistrict.c" />
+    <ClCompile Include="loadT.c" />
+    <ClCompile Include="norm.c" />
     <ClCompile Include="queue.c" />
     <ClCompile Include="districtAvg.c" />
     <ClCompile Include="listTad.c" />
@@ -165,7 +168,10 @@
     <ClCompile Include="utils.c" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\..\..\..\..\Downloads\clinicalData_train.csv" />
+    <None Include="..\..\..\..\..\..\..\Downloads\patients_train.csv" />
     <None Include="clinicalData.csv" />
+    <None Include="loadT.h" />
     <None Include="patients.csv" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

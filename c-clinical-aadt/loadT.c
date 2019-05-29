@@ -2,18 +2,20 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "loadT.h";
 #include "info.h"
 #include "listTad.h"
 #include "patient.h"
 #include "utils.h"
 
-//LOAD
-void importPatientsFromFile(char* fileNamePatients, char* fileNameClinicalData, PtList patients) {
+
+//LOADT
+void importDataNeuralNet(char* fileNamePatientsTrain, char* fileNameClinicalDataTrain, PtList patients) {
 	FILE* f;
-	int error = fopen_s(&f, fileNamePatients, "r"); //opens the file in read mode
+	int error = fopen_s(&f, fileNamePatientsTrain, "r"); //opens the file in read mode
 
 	if (error) {
-		printf("An error occured... It was not possible to open the file %s ...\n", fileNamePatients);
+		printf("An error occured... It was not possible to open the file %s ...\n", fileNamePatientsTrain);
 		return;
 	}
 
@@ -51,10 +53,10 @@ void importPatientsFromFile(char* fileNamePatients, char* fileNameClinicalData, 
 
 
 	FILE* f2;
-	int error2 = fopen_s(&f2, fileNameClinicalData, "r"); //opens the file in read mode
+	int error2 = fopen_s(&f2, fileNameClinicalDataTrain, "r"); //opens the file in read mode
 
 	if (error2) {
-		printf("An error occured... It was not possible to open the file %s ...\n", fileNamePatients);
+		printf("An error occured... It was not possible to open the file %s ...\n", fileNamePatientsTrain);
 		return;
 	}
 
@@ -106,65 +108,3 @@ void importPatientsFromFile(char* fileNamePatients, char* fileNameClinicalData, 
 	fclose(f2);
 	printf("Foram lidos %d pacientes e informação sobre %d dados clinicos \n", countPatients, clinicalDataCount);
 }
-
-float incrementalAverage(float avg_n, int n, float v_n1) {
-	if (n == 0) {
-		return v_n1;
-	}
-
-	return ((avg_n*n )+ (v_n1)) / (n + 1);
-}
-
-int findPatientById(PtList list, int id, Patient* patient, int* pos) {
-	int size;
-	listSize(list, &size);
-	for (int i = 0; i < size; i++) {
-		listGet(list, i, patient);
-		if (patient->id == id) {
-			*pos = i;
-			return 1;
-		}
-	}
-	return 0;
-}
-
-
-int getAge(Date actualdate, Date birthdate) {
-	int age = actualdate.year - birthdate.year;
-	if (actualdate.month < birthdate.month)
-		age--;
-	else if (actualdate.month == birthdate.month) {
-		if (actualdate.day < birthdate.day)
-			age--;
-	}
-	return age;
-}
-
-//CLEAR
-void clearData(PtList *list) {
-	int size;
-	listSize(*list, &size);
-	printf("Foram apagados %d registos de pacientes\n", size);
-	listClear(*list);
-
-	// TODO After CLEAR command LOAD not working
-}
-
-//SHOW
-void showData(PtList list) {
-	if (listIsEmpty(list)) {
-	}
-	listPrint(list);
-}
-
-// QUIT
-void QuitProgram(PtList list) {
-	int size;
-	listSize(list, &size);
-	if (size > 0) {
-		listDestroy(&list);
-	}
-	exit(0);
-}
-
-

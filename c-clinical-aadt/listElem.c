@@ -6,3 +6,7 @@
 void listElemPrint(ListElem elem) {
 	printPatient(elem);
 }
+
+void listElemNormPrint(ListElem elem) {
+	printNormPatient(elem);
+}

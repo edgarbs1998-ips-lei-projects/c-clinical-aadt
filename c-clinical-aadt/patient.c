@@ -22,3 +22,9 @@ void printPatient(Patient patient) {
 		patient.gender, patient.hospital, patient.district, patient.clinicalData.age,patient.clinicalData.bmi,
 		patient.clinicalData.glucose,patient.clinicalData.insulin,patient.clinicalData.mcp1);
 }
+
+void printNormPatient(Patient patient) {
+	printf("%5d %5.2f %5.2f %5.2f %5.2f %5.2f\n",
+		patient.id,patient.clinicalData.age, patient.clinicalData.bmi,
+		patient.clinicalData.glucose, patient.clinicalData.insulin, patient.clinicalData.mcp1);
+}

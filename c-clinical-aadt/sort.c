@@ -152,30 +152,32 @@ void bubbleSortDistrict(PtList list, int listSize) {
 
 // Sort menu
 void showSortMenu(PtList list) {
-	String command;
-	int option;
-	printf("\n===================================================================================");
-	printf("\n                                        SORT                                       ");
-	printf("\n===================================================================================");
-	printf("\n0 - Ordenar por data de nascimento");
-	printf("\n1 - Ordenar por hospital");
-	printf("\n2 - Ordenar por distrito");
-	printf("\nOption> ");
+	do {
+		String command;
+		int option;
+		printf("\n===================================================================================");
+		printf("\n                                        SORT                                       ");
+		printf("\n===================================================================================");
+		printf("\n0 - Ordenar por data de nascimento");
+		printf("\n1 - Ordenar por hospital");
+		printf("\n2 - Ordenar por distrito");
+		printf("\nOption> ");
 
-	fgets(command, sizeof(command), stdin);
-	command[strlen(command) - 1] = '\0';
-	option = atoi(command);
+		fgets(command, sizeof(command), stdin);
+		command[strlen(command) - 1] = '\0';
+		option = atoi(command);
 
-	// TODO Keep sort menu after execution
+		switch (option)
+		{
+		case 0: sortByBirthDate(list);
 
-	switch (option)
-	{
-	case 0: sortByBirthDate(list);
-		break;
-	case 1: sortByHospital(list);
-		break;
-	case 2: sortByDistrict(list);
-		break;
-	default: showSortMenu(list);
-	}
+			break;
+		case 1: sortByHospital(list);
+			break;
+		case 2: sortByDistrict(list);
+			break;
+		default: showSortMenu(list);
+		}
+	} 
+	while (1);
 }
