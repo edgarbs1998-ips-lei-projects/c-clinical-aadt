@@ -68,13 +68,18 @@ void importDataNeuralNet(char* fileNamePatientsTrain, char* fileNameClinicalData
 
 		nextLine[strlen(nextLine2) - 1] = '\0';
 
-		char** tokens = split(nextLine2, 6, ";");
+		char** tokens = split(nextLine2, 11, ";");
 		//tokens[0] - id
 		//tokens[1] - date
 		//tokens[2] - bmi
 		//tokens[3] - glucose
 		//tokens[4] - insulin
 		//tokens[5] - mcp1
+		//tokens[6] - type_disease
+		//tokens[7] - c1
+		//tokens[8] - c2
+		//tokens[9] - c3
+		//tokens[10] - c4
 
 		int idPatient = atoi(tokens[0]);
 
@@ -97,6 +102,9 @@ void importDataNeuralNet(char* fileNamePatientsTrain, char* fileNameClinicalData
 		patient1.clinicalData.glucose = incrementalAverage(patient1.clinicalData.glucose, patient1.clinicalData.clinicalDataCount, (float)atof(tokens[3]));
 		patient1.clinicalData.insulin = incrementalAverage(patient1.clinicalData.insulin, patient1.clinicalData.clinicalDataCount, (float)atof(tokens[4]));
 		patient1.clinicalData.mcp1 = incrementalAverage(patient1.clinicalData.mcp1, patient1.clinicalData.clinicalDataCount, (float)atof(tokens[5]));
+		patient1.clinicalData.disease_type = tokens[6];
+
+
 
 		patient1.clinicalData.clinicalDataCount++;
 		clinicalDataCount++;
