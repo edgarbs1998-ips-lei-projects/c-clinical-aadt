@@ -79,7 +79,7 @@ int main(int argc, char** argv) {
 			showCheckDistrictMenu(patientList);
 		}
 		else if (equalsStringIgnoreCase(command, "LOADT")) {
-			importPatientsFromFile("patients_train.csv", "clinicalData_train.csv", neuralNetList);
+			importDataNeuralNet("patients_train.csv", "clinicalData_train.csv", neuralNetList);
 		}
 		else if (equalsStringIgnoreCase(command, "NORMT")) {
 			printf("Comando NORMT nao implementado.\n");
