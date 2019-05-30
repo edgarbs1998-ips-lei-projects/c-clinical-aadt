@@ -234,20 +234,6 @@ void listPrint(PtList list) {
 	}
 }
 
-void listNormPrint(PtList list) {
-
-	if (list == NULL)
-		printf("LIST NULL \n");
-	else if ( /*listIsEmpty(list)*/ list->size == 0)
-		printf("LIST EMPTY \n");
-	else {
-		for (int rank = 0; rank < list->size; rank++) {
-			
-			printNormPatient(list->elements[rank]);
-		}
-
-	}
-}
 
 
 

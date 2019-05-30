@@ -80,9 +80,10 @@ int main(int argc, char** argv) {
 		}
 		else if (equalsStringIgnoreCase(command, "LOADT")) {
 			importDataNeuralNet("patients_train.csv", "clinicalData_train.csv", neuralNetList);
+			
 		}
 		else if (equalsStringIgnoreCase(command, "NORMT")) {
-			printf("Comando NORMT nao implementado.\n");
+			listNormPrint(normalizeClinicalDataNeuralNet(neuralNetList));
 		}
 		else if (equalsStringIgnoreCase(command, "NEURALNET")) {
 			printf("Comando NEURALNET nao implementado.\n");
