@@ -10,3 +10,7 @@ void listElemPrint(ListElem elem) {
 void listElemNormPrint(ListElem elem) {
 	printNormPatient(elem);
 }
+
+void listElemNeuralnetPrint(ListElem elem) {
+	printNeuralnetPatient(elem);
+}

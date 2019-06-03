@@ -103,10 +103,10 @@ void importDataNeuralNet(char* fileNamePatientsTrain, char* fileNameClinicalData
 		patient1.clinicalData.insulin = incrementalAverage(patient1.clinicalData.insulin, patient1.clinicalData.clinicalDataCount, (float)atof(tokens[4]));
 		patient1.clinicalData.mcp1 = incrementalAverage(patient1.clinicalData.mcp1, patient1.clinicalData.clinicalDataCount, (float)atof(tokens[5]));
 		patient1.clinicalData.disease_type = tokens[6];
-		patient1.diseaseType.c1 = atof(tokens[7]);
-		patient1.diseaseType.c2 = atof(tokens[8]);
-		patient1.diseaseType.c3 = atof(tokens[9]);
-		patient1.diseaseType.c4 = atof(tokens[10]);
+		patient1.clinicalData.disease_weight.c1 = atof(tokens[7]);
+		patient1.clinicalData.disease_weight.c2 = atof(tokens[8]);
+		patient1.clinicalData.disease_weight.c3 = atof(tokens[9]);
+		patient1.clinicalData.disease_weight.c4 = atof(tokens[10]);
 
 		patient1.clinicalData.clinicalDataCount++;
 		clinicalDataCount++;

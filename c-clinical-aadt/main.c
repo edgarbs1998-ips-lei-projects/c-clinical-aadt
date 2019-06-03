@@ -19,6 +19,7 @@
 #include "checkDistrict.h"
 #include "norm.h"
 #include "loadT.h"
+#include "neuralnet.h"
 
 /* definicao de prototipos de funcoes, definidas depois do main() */
 int equalsStringIgnoreCase(char str1[], char str2[]);
@@ -86,7 +87,7 @@ int main(int argc, char** argv) {
 			listNormPrint(normalizeClinicalDataNeuralNet(neuralNetList));
 		}
 		else if (equalsStringIgnoreCase(command, "NEURALNET")) {
-			printf("Comando NEURALNET nao implementado.\n");
+			showNeuralnetMenu(patientList, neuralNetList);
 		}
 		else {
 			printf("Comando não encontrado.\n");

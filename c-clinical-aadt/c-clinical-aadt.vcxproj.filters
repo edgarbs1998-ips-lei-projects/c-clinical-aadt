@@ -31,6 +31,12 @@
     <Filter Include="Source Files\data">
       <UniqueIdentifier>{d2dd3d28-eb68-4593-b203-b51e4b051e21}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\neuralnet">
+      <UniqueIdentifier>{e5508cdb-8001-478c-aadf-85d3e0fad84c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\neuralnet">
+      <UniqueIdentifier>{cfee5a1b-8a58-48c3-ac78-29977637a9a9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="info.h">
@@ -99,6 +105,9 @@
     <ClInclude Include="norm.h">
       <Filter>Header Files\aggregations</Filter>
     </ClInclude>
+    <ClInclude Include="neuralnet.h">
+      <Filter>Header Files\neuralnet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c">
@@ -156,7 +165,10 @@
       <Filter>Source Files\aggregations</Filter>
     </ClCompile>
     <ClCompile Include="loadT.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\neuralnet</Filter>
+    </ClCompile>
+    <ClCompile Include="neuralnet.c">
+      <Filter>Source Files\neuralnet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -173,7 +185,7 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="loadT.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\neuralnet</Filter>
     </None>
   </ItemGroup>
 </Project>
