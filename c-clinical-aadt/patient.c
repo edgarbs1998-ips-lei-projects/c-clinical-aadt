@@ -24,13 +24,13 @@ void printPatient(Patient patient) {
 }
 
 void printNormPatient(Patient patient) {
-	printf("%5d %5.2f %5.2f %5.2f %5.2f %5.2f\n",
+	printf("%3d %5.2f %5.2f %5.2f %5.2f %5.2f\n",
 		patient.id,patient.clinicalData.age, patient.clinicalData.bmi,
 		patient.clinicalData.glucose, patient.clinicalData.insulin, patient.clinicalData.mcp1);
 }
 
 void printNeuralnetPatient(Patient patient) {
-	printf("%5d %5.2f %5.2f %5.2f %5.2f %5.2f %d [%7.5f %7.5f %7.5f %7.5f]\n",
+	printf("%3d %5.2f %5.2f %5.2f %5.2f %5.2f %d [%7.5f %7.5f %7.5f %7.5f]\n",
 		patient.id, patient.clinicalData.age, patient.clinicalData.bmi,
 		patient.clinicalData.glucose, patient.clinicalData.insulin, patient.clinicalData.mcp1,
 		patient.clinicalData.disease_type, patient.clinicalData.disease_weight.c1, patient.clinicalData.disease_weight.c2,

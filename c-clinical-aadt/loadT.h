@@ -1,5 +1,8 @@
 #pragma once
 
 #include "listTad.h"
+#include "string.h"
 
-void importDataNeuralNet(char* fileNamePatients, char* fileNameClinicalData, PtList patients);
+int loadPatientTrainFile(String filePath, PtList patients);
+int loadClinicalDataTrainFile(String filePath, PtList patients);
+void loadTrainData(PtList patients);

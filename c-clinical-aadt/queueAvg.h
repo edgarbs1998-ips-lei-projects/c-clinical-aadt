@@ -1,7 +1,5 @@
 #pragma once
 
-#include <stdlib.h>
-
 typedef struct queueAvg {
 	double avgAge;
 	double avgBmi;

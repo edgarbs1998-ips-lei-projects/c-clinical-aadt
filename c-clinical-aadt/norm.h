@@ -1,7 +1,8 @@
 #pragma once
+
 #include "listTad.h"
 
-PtList normalizeClinicalData(PtList patients);
-void normalize(float *x, float max, float min, float k);
-void listNormPrint(PtList list);
-PtList normalizeClinicalDataNeuralNet(PtList patients);
+void normalize(float* x, float max, float min, float k);
+PtList normalizeClinicalData(PtList list, int k);
+void printNormalizedClinicalData(PtList list, int k);
+void printNormalizeClinicalData(PtList list);

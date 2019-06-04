@@ -19,6 +19,6 @@ typedef struct clinicalData {
 	float insulin; /* Valores médios da Insulina (µU/ml) */
 	float mcp1; /* Valores médios da Proteina MCP-1 (pg/ml)*/
 	int disease_type; /* Classificacao do Doente 1 – Doença1 2 – Doença2 3 – Doença3 4 – Sem Doença Usado apenas na opcao NEURALNET*/
-	DiseaseWeight disease_weight;
+	DiseaseWeight disease_weight; /* Peso de cada doença após o cálculo da NEURALNET */
 	int clinicalDataCount; /* Numero de vezes que os dados foram obtidos */
 } ClinicalData;

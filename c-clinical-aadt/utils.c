@@ -138,4 +138,7 @@ void getMinMax(PtList list, int listSize, MinMax *minMax) {
 	}
 }
 
-
+void showNoDataWarning() {
+	printf("\nSEM DADOS CARREGADOS\n\n");
+	system("pause");
+}

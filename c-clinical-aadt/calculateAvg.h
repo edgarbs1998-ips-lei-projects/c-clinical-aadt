@@ -1,7 +1,5 @@
 #pragma once
 
-#include <stdlib.h>
-
 typedef struct calculateAvg {
 	float sumAge;
 	int countAge;

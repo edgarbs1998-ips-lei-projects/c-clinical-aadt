@@ -1,13 +1,15 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <locale.h>
 #include <math.h>
+#include <conio.h>
 
 #include "neuralnet.h"
 #include "string.h"
 #include "listTad.h"
 #include "norm.h"
+#include "normT.h"
+#include "clinicalData.h"
 
 void initializeWeights(double weightIH[][HIDDEN_LAYER_SIZE+1], double deltaWeightIH[][HIDDEN_LAYER_SIZE+1], double wightHO[][OUTPUT_LAYER_SIZE+1], double deltaWeightHO[][OUTPUT_LAYER_SIZE+1]) {
 	// Initialize weightIH and deltaWeightIH
@@ -73,22 +75,22 @@ void calculateDiseaseType(ListElem* elem) {
 
 	if (elem->clinicalData.disease_weight.c1 > elem->clinicalData.disease_weight.c2) {
 		max = elem->clinicalData.disease_weight.c1;
-		diseaseType = 1;
+		diseaseType = DOENCA1;
 	}
 	else {
 		max = elem->clinicalData.disease_weight.c2;
-		diseaseType = 2;
+		diseaseType = DOENCA2;
 	}
 	if (elem->clinicalData.disease_weight.c3 > elem->clinicalData.disease_weight.c4) {
 		if (elem->clinicalData.disease_weight.c3 > max) {
 			max = elem->clinicalData.disease_weight.c3;
-			diseaseType = 3;
+			diseaseType = DOENCA3;
 		}
 	}
 	else {
 		if (elem->clinicalData.disease_weight.c4 > max) {
 			max = elem->clinicalData.disease_weight.c4;
-			diseaseType = 4;
+			diseaseType = SEM_DOENCA;
 		}
 	}
 
@@ -99,12 +101,15 @@ double sigmoide(double x) {
 	return 1.0 / (1.0 + exp(-x));
 }
 
-void exec(PtList normPatients, int normPatientsSize, double weightIH[][HIDDEN_LAYER_SIZE+1], double weightHO[][OUTPUT_LAYER_SIZE+1]) {
+PtList compute(PtList normPatients, double weightIH[][HIDDEN_LAYER_SIZE+1], double weightHO[][OUTPUT_LAYER_SIZE+1]) {
+	int normPatientsSize;
+	listSize(normPatients, &normPatientsSize);
+
 	ListElem elem;
 	double sumH[INPUT_LAYER_SIZE+1];
 	double sumO[OUTPUT_LAYER_SIZE+1];
 	double hidden[HIDDEN_LAYER_SIZE+1];
-	PtList output = listCreate(normPatientsSize);
+	PtList outputList = listCreate(normPatientsSize);
 
 	// Repeat for all patients
 	for (int p = 0; p < normPatientsSize; ++p) {
@@ -133,13 +138,34 @@ void exec(PtList normPatients, int normPatientsSize, double weightIH[][HIDDEN_LA
 		calculateDiseaseType(&elem);
 
 		// Add computed patient to the output list
-		listAdd(output, p, elem);
+		listAdd(outputList, p, elem);
 	}
 
-	//for (int rank = 0; rank < normPatientsSize; rank++) {
-	//	listGet(output, rank, &elem);
-	//	listElemNeuralnetPrint(elem);
-	//}
+	return outputList;
+}
+
+void printOutout(PtList output) {
+	int diseaseTypeCounter[OUTPUT_LAYER_SIZE] = { 0 };
+
+	ListElem elem;
+	int outputSize;
+	listSize(output, &outputSize);
+
+	printf("\nInd. Age Bmi Glicose Insulin Mcp1 NeuralNet Results\n");
+	for (int i = 0; i < outputSize; i++) {
+		listGet(output, i, &elem);
+		listElemNeuralnetPrint(elem);
+
+		++diseaseTypeCounter[elem.clinicalData.disease_type - 1];
+	}
+
+	printf("\n\nPatients Type Number\n");
+	for (int i = 0; i < OUTPUT_LAYER_SIZE; ++i) {
+		printf("Type %d: %3d\n", i+1, diseaseTypeCounter[i]);
+	}
+
+	printf("\n");
+	system("pause");
 }
 
 //void train() {
@@ -148,10 +174,14 @@ void exec(PtList normPatients, int normPatientsSize, double weightIH[][HIDDEN_LA
 
 // Neuralnet menu
 void showNeuralnetMenu(PtList ptList, PtList ptListTrain) {
-	PtList normPatients = normalizeClinicalData(ptList);
-	int normPatientsSize;
-	listSize(normPatients, &normPatientsSize);
-	PtList normTrain;
+	if (listIsEmpty(ptList) == 1 || listIsEmpty(ptListTrain) == 1) {
+		showNoDataWarning();
+		return;
+	}
+
+	PtList normPatients = normalizeClinicalData(ptList, NEURAL_NET_NORM_K);
+	PtList normTrain = normalizeClinicalData(ptListTrain, NEURAL_NET_NORM_K);
+	PtList outputList = listCreate(NULL);
 
 	double weightIH[INPUT_LAYER_SIZE+1][HIDDEN_LAYER_SIZE+1], deltaWeightIH[INPUT_LAYER_SIZE+1][HIDDEN_LAYER_SIZE+1];
 	double weightHO[HIDDEN_LAYER_SIZE+1][OUTPUT_LAYER_SIZE +1], deltaWeightHO[HIDDEN_LAYER_SIZE +1][OUTPUT_LAYER_SIZE +1];
@@ -159,29 +189,42 @@ void showNeuralnetMenu(PtList ptList, PtList ptListTrain) {
 	initializeWeights(&weightIH, &deltaWeightIH, &weightHO, &deltaWeightHO);
 
 	/* interpretador de comandos */
-	String command;
+	char option;
+	int exit = 0;
 
-	setlocale(LC_ALL, "PT");
 	do {
+		system("cls");
+
 		printf("\n===================================================================================");
 		printf("\n                                     NEURALNET                                     ");
 		printf("\n===================================================================================");
-		printf("\nexec - Classifica e imprime os pacientes em 4 grupos de doenças com base nos seus dados clínicos.");
-		printf("\ntrain - Treina a rede neuronal com os valores carregados através do comando LOADT.");
-		printf("\nstop - Termina este processo da rede neuronal.");
-		printf("\n\nCOMMAND> ");
+		printf("\n1 - Classifica e imprime os pacientes em 4 grupos de doenças com base nos seus dados clínicos.");
+		printf("\n2 - Treina a rede neuronal com os valores carregados através do comando LOADT.");
+		printf("\n0 - Volta ao menu anterior, removendo da memória os dados referentes as redes neuronais.");
+		printf("\n\n");
 
-		fgets(command, sizeof(command), stdin);
-		command[strlen(command) - 1] = '\0';
+		// Aguarda que o utilizador pressione um carater, ignora a tecla ENTER que causava comportamentos indesejados
+		do {
+			option = _getch();
+		} while (option == 13 /* RETURN */);
 
-		if (equalsStringIgnoreCase(command, "EXEC")) {
-			exec(normPatients, normPatientsSize, weightIH, weightHO);
-		}
-		else if (equalsStringIgnoreCase(command, "TRAIN")) {
+		switch (option) {
+		case '1':
+			outputList = compute(normPatients, weightIH, weightHO);
+			printOutout(outputList);
+
+			listDestroy(&outputList);
+			break;
+		case '2':
 			//train();
-		}
-		else if (equalsStringIgnoreCase(command, "STOP")) {
+			break;
+		case '0':
+			exit = 1;
 			break;
 		}
-	} while (1);
+	} while (exit == 0);
+
+	// Libertar memória
+	listDestroy(&normPatients);
+	listDestroy(&normTrain);
 }

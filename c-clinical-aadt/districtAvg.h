@@ -1,7 +1,5 @@
 #pragma once
 
-#include <stdlib.h>
-
 typedef struct districtAvg {
 	float age; /* media das idades no distrito */
 	float bmi; /* media dos valores de IMC no distrito */

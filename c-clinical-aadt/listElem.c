@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 #include "listElem.h"
 #include "patient.h"
 

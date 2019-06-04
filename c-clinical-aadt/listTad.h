@@ -22,4 +22,3 @@ int listSize(PtList list, int* ptSize);
 int listIsEmpty(PtList list);
 int listClear(PtList list);
 void listPrint(PtList list);
-

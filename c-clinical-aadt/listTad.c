@@ -233,7 +233,3 @@ void listPrint(PtList list) {
 
 	}
 }
-
-
-
-

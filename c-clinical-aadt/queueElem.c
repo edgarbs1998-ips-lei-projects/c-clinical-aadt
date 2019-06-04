@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 #include "queueElem.h"
 #include "patient.h"
 

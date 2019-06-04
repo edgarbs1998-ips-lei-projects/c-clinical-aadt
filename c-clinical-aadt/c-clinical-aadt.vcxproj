@@ -126,9 +126,11 @@
     <ClInclude Include="avg.h" />
     <ClInclude Include="calculateAvg.h" />
     <ClInclude Include="date.h" />
+    <ClInclude Include="load.h" />
     <ClInclude Include="minMax.h" />
     <ClInclude Include="neuralnet.h" />
     <ClInclude Include="norm.h" />
+    <ClInclude Include="normT.h" />
     <ClInclude Include="queueAvg.h" />
     <ClInclude Include="checkDistrict.h" />
     <ClInclude Include="districtAvg.h" />
@@ -151,9 +153,11 @@
     <ClCompile Include="avg.c" />
     <ClCompile Include="calculateAvg.c" />
     <ClCompile Include="checkDistrict.c" />
+    <ClCompile Include="load.c" />
     <ClCompile Include="loadT.c" />
     <ClCompile Include="neuralnet.c" />
     <ClCompile Include="norm.c" />
+    <ClCompile Include="normT.c" />
     <ClCompile Include="queue.c" />
     <ClCompile Include="districtAvg.c" />
     <ClCompile Include="listTad.c" />

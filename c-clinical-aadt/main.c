@@ -1,4 +1,4 @@
-/* PROJETO  ATAD 2018-19
+/* PROJETO ATAD 2018-19
 * Identificacao dos Alunos:
 *
 *      Numero: 180221098 | Nome: André Pereira
@@ -10,8 +10,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <locale.h>
+#include <windows.h>
 
 #include "string.h"
+#include "load.h"
 #include "info.h"
 #include "sort.h"
 #include "avg.h"
@@ -19,12 +21,11 @@
 #include "checkDistrict.h"
 #include "norm.h"
 #include "loadT.h"
+#include "normT.h"
 #include "neuralnet.h"
 
 /* definicao de prototipos de funcoes, definidas depois do main() */
-int equalsStringIgnoreCase(char str1[], char str2[]);
 void printCommandsMenu();
-//...
 
 /*
 * Descrição do Programa
@@ -35,14 +36,19 @@ int main(int argc, char** argv) {
 	PtList patientList = listCreate(10);
 	PtList neuralNetList = listCreate(10);
 
+	/* define o titulo da consola */
+	SetConsoleTitle("C Clinical AADT");
+
 	/* interpretador de comandos */
 	String command;
 	int quit = 0;
 
 	setlocale(LC_ALL, "PT");
 	while (!quit) {
+		system("cls");
 
 		printCommandsMenu();
+
 		fgets(command, sizeof(command), stdin);
 		/* descartar 'newline'. Utilizar esta técnica sempre que for lida uma
 		* string para ser utilizada, e.g., nome de ficheiro, chave, etc.. */
@@ -51,17 +57,14 @@ int main(int argc, char** argv) {
 		if (equalsStringIgnoreCase(command, "QUIT")) {
 			/* vai provocar a saída do interpretador */
 			quit = 1;
-			QuitProgram(patientList);
 		}
 		else if (equalsStringIgnoreCase(command, "LOAD")) {
-			importPatientsFromFile("patients.csv", "clinicalData.csv", patientList);
+			loadData(patientList);
 		}
 		else if (equalsStringIgnoreCase(command, "CLEAR")) {
-			clearData(&patientList);
+			clearData(patientList);
 		}
 		else if (equalsStringIgnoreCase(command, "SHOW")) {
-			printf("%18s %s %s %s %37s %12s %s %9s %s %s\n",
-				"Indice", "BirthDate", "Sex", "Hospital", "District", "Age", "Bmi", "Glicose", "Insulin", "Mpc1");
 			showData(patientList);
 		}
 		else if (equalsStringIgnoreCase(command, "SORT")) {
@@ -71,7 +74,7 @@ int main(int argc, char** argv) {
 			averageClinicalData(patientList);
 		}
 		else if (equalsStringIgnoreCase(command, "NORM")) {
-			listNormPrint(normalizeClinicalData(patientList));
+			printNormalizeClinicalData(patientList);
 		}
 		else if (equalsStringIgnoreCase(command, "QUEUE")) {
 			queuePatients(patientList);
@@ -80,21 +83,24 @@ int main(int argc, char** argv) {
 			showCheckDistrictMenu(patientList);
 		}
 		else if (equalsStringIgnoreCase(command, "LOADT")) {
-			importDataNeuralNet("patients_train.csv", "clinicalData_train.csv", neuralNetList);
-			
+			loadTrainData(neuralNetList);
 		}
 		else if (equalsStringIgnoreCase(command, "NORMT")) {
-			listNormPrint(normalizeClinicalDataNeuralNet(neuralNetList));
+			printNormalizeClinicalDataNeuralNet(neuralNetList);
 		}
 		else if (equalsStringIgnoreCase(command, "NEURALNET")) {
 			showNeuralnetMenu(patientList, neuralNetList);
 		}
 		else {
-			printf("Comando não encontrado.\n");
+			printf("\nComando não encontrado.\n\n");
+			system("pause");
 		}
 	}
 
 	/* libertar memória e apresentar mensagem de saída. */
+	listDestroy(&patientList);
+	listDestroy(&neuralNetList);
+	printf("\nGoodbye!\n");
 
 	return (EXIT_SUCCESS);
 }

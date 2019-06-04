@@ -1,6 +1,7 @@
-#include "queue.h" /* já inclui também queueElem.h */
 #include <stdio.h>
 #include <stdlib.h>
+
+#include "queue.h" /* já inclui também queueElem.h */
 
 /* Definicao da representacao de dados em memória: */
 typedef struct queueImpl {
@@ -8,7 +9,6 @@ typedef struct queueImpl {
 	unsigned int capacity;
 	unsigned int size;
 } QueueImpl;
-
 
 /*
 Cria uma nova instância da Queue.
@@ -212,4 +212,3 @@ void queuePrint(PtQueue queue) {
 		printf("------------------------------ \n");
 	}
 }
-

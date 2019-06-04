@@ -1,28 +1,28 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/stat.h>
 
-#include "loadT.h";
-#include "info.h"
+#include "loadT.h"
+#include "load.h"
+#include "string.h"
 #include "listTad.h"
+#include "date.h"
 #include "patient.h"
 #include "utils.h"
 
-
-//LOADT
-void importDataNeuralNet(char* fileNamePatientsTrain, char* fileNameClinicalDataTrain, PtList patients) {
+int loadPatientTrainFile(String filePath, PtList patients) {
 	FILE* f;
-	int error = fopen_s(&f, fileNamePatientsTrain, "r"); //opens the file in read mode
+	int error = fopen_s(&f, filePath, "r"); //opens the file in read mode
 
 	if (error) {
-		printf("An error occured... It was not possible to open the file %s ...\n", fileNamePatientsTrain);
-		return;
+		printf("\n[ERROR] It was not possible to open the Patient file %s ...\n", filePath);
+		return 0;
 	}
 
 	int patientID;
 	char nextLine[1024];
 	int countPatients = 0; //Patients count
-	int clinicalDataCount = 0; //ClinicalData count
 
 	while (fgets(nextLine, sizeof(nextLine), f)) {
 		if (strlen(nextLine) < 1)
@@ -38,6 +38,7 @@ void importDataNeuralNet(char* fileNamePatientsTrain, char* fileNameClinicalData
 		//tokens[4] - district
 
 		patientID = atoi(tokens[0]);
+
 		int day, month, year;
 		sscanf_s(tokens[1], "%d/%d/%d", &day, &month, &year);
 
@@ -47,28 +48,35 @@ void importDataNeuralNet(char* fileNamePatientsTrain, char* fileNameClinicalData
 		listSize(patients, &size);
 		listAdd(patients, size, newPatient);
 
-		free(tokens);
 		countPatients++;
+
+		free(tokens);
+	}
+	fclose(f);
+
+	return countPatients;
+}
+
+int loadClinicalDataTrainFile(String filePath, PtList patients) {
+	FILE* f;
+	int error = fopen_s(&f, filePath, "r"); //opens the file in read mode
+
+	if (error) {
+		printf("\n[ERROR] It was not possible to open the ClinicalData file %s ...\n", filePath);
+		return 0;
 	}
 
+	int patientID;
+	char nextLine[1024];
+	int clinicalDataCount = 0; //ClinicalData count
 
-	FILE* f2;
-	int error2 = fopen_s(&f2, fileNameClinicalDataTrain, "r"); //opens the file in read mode
-
-	if (error2) {
-		printf("An error occured... It was not possible to open the file %s ...\n", fileNamePatientsTrain);
-		return;
-	}
-
-	char nextLine2[1024];
-
-	while (fgets(nextLine2, sizeof(nextLine2), f2)) {
-		if (strlen(nextLine2) < 1)
+	while (fgets(nextLine, sizeof(nextLine), f)) {
+		if (strlen(nextLine) < 1)
 			continue;
 
-		nextLine[strlen(nextLine2) - 1] = '\0';
+		nextLine[strlen(nextLine) - 1] = '\0';
 
-		char** tokens = split(nextLine2, 11, ";");
+		char** tokens = split(nextLine, 11, ";");
 		//tokens[0] - id
 		//tokens[1] - date
 		//tokens[2] - bmi
@@ -83,38 +91,67 @@ void importDataNeuralNet(char* fileNamePatientsTrain, char* fileNameClinicalData
 
 		int idPatient = atoi(tokens[0]);
 
-		Patient patient1;
+		Patient tempPatient;
 
 		int pos;
-		if (findPatientById(patients, idPatient, &patient1, &pos) == 0) {
-			printf("Error finding patient id!\n");
-			system("pause");
-			return;
+		if (findPatientById(patients, idPatient, &tempPatient, &pos) == 0) {
+			printf("\n[ERROR] Could not find patient id %d! Ignoring this clinical data train row...\n", idPatient);
+			continue;
 		};
-
 
 		int day, month, year;
 		sscanf_s(tokens[1], "%d/%d/%d", &day, &month, &year);
 		Date registDate = dateCreate(day, month, year);
 
-		patient1.clinicalData.age = (float)getAge(registDate, patient1.birthdate);
-		patient1.clinicalData.bmi = incrementalAverage(patient1.clinicalData.bmi, patient1.clinicalData.clinicalDataCount, (float)atof(tokens[2]));
-		patient1.clinicalData.glucose = incrementalAverage(patient1.clinicalData.glucose, patient1.clinicalData.clinicalDataCount, (float)atof(tokens[3]));
-		patient1.clinicalData.insulin = incrementalAverage(patient1.clinicalData.insulin, patient1.clinicalData.clinicalDataCount, (float)atof(tokens[4]));
-		patient1.clinicalData.mcp1 = incrementalAverage(patient1.clinicalData.mcp1, patient1.clinicalData.clinicalDataCount, (float)atof(tokens[5]));
-		patient1.clinicalData.disease_type = tokens[6];
-		patient1.clinicalData.disease_weight.c1 = atof(tokens[7]);
-		patient1.clinicalData.disease_weight.c2 = atof(tokens[8]);
-		patient1.clinicalData.disease_weight.c3 = atof(tokens[9]);
-		patient1.clinicalData.disease_weight.c4 = atof(tokens[10]);
+		tempPatient.clinicalData.age = (float)getAge(registDate, tempPatient.birthdate);
+		tempPatient.clinicalData.bmi = incrementalAverage(tempPatient.clinicalData.bmi, tempPatient.clinicalData.clinicalDataCount, (float)atof(tokens[2]));
+		tempPatient.clinicalData.glucose = incrementalAverage(tempPatient.clinicalData.glucose, tempPatient.clinicalData.clinicalDataCount, (float)atof(tokens[3]));
+		tempPatient.clinicalData.insulin = incrementalAverage(tempPatient.clinicalData.insulin, tempPatient.clinicalData.clinicalDataCount, (float)atof(tokens[4]));
+		tempPatient.clinicalData.mcp1 = incrementalAverage(tempPatient.clinicalData.mcp1, tempPatient.clinicalData.clinicalDataCount, (float)atof(tokens[5]));
+		tempPatient.clinicalData.disease_type = tokens[6];
+		tempPatient.clinicalData.disease_weight.c1 = atof(tokens[7]);
+		tempPatient.clinicalData.disease_weight.c2 = atof(tokens[8]);
+		tempPatient.clinicalData.disease_weight.c3 = atof(tokens[9]);
+		tempPatient.clinicalData.disease_weight.c4 = atof(tokens[10]);
 
-		patient1.clinicalData.clinicalDataCount++;
+		tempPatient.clinicalData.clinicalDataCount++;
 		clinicalDataCount++;
 
 		Patient oldElem;
-		listSet(patients, pos, patient1, &oldElem);
+		listSet(patients, pos, tempPatient, &oldElem);
 
+		free(tokens);
 	}
-	fclose(f2);
-	printf("Foram lidos %d pacientes e informação sobre %d dados clinicos \n", countPatients, clinicalDataCount);
+	fclose(f);
+
+	return clinicalDataCount;
+}
+
+void loadTrainData(PtList patients) {
+	String filePatient, fileClinicalData;
+	struct stat fileStat;
+
+	printf("\nEnter the path of the Patient Train file: ");
+	gets(filePatient, sizeof(filePatient));
+
+	if (stat(filePatient, &fileStat) != 0) {
+		printf("The entered file could not be found, please try again...\n\n");
+		system("pause");
+		return;
+	}
+
+	printf("\nEnter the path of the ClinicalData Train file: ");
+	gets(fileClinicalData, sizeof(fileClinicalData));
+
+	if (stat(fileClinicalData, &fileStat) != 0) {
+		printf("The entered file could not be found, please try again...\n\n");
+		system("pause");
+		return;
+	}
+
+	int patientCount = loadPatientTrainFile(filePatient, patients);
+	int clinicalDataCount = loadClinicalDataTrainFile(fileClinicalData, patients);
+
+	printf("\nForam lidos %d pacientes e informação sobre %d dados clinicos de treino\n\n", patientCount, clinicalDataCount);
+	system("pause");
 }

@@ -37,11 +37,14 @@
     <Filter Include="Header Files\neuralnet">
       <UniqueIdentifier>{cfee5a1b-8a58-48c3-ac78-29977637a9a9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\info">
+      <UniqueIdentifier>{a9a7daf2-bfce-428e-936a-e27daa1a398a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\info">
+      <UniqueIdentifier>{18c1e050-340d-4e9d-bcd4-7a325bf9156d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="info.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -108,12 +111,18 @@
     <ClInclude Include="neuralnet.h">
       <Filter>Header Files\neuralnet</Filter>
     </ClInclude>
+    <ClInclude Include="info.h">
+      <Filter>Header Files\info</Filter>
+    </ClInclude>
+    <ClInclude Include="load.h">
+      <Filter>Header Files\info</Filter>
+    </ClInclude>
+    <ClInclude Include="normT.h">
+      <Filter>Header Files\neuralnet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="info.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="utils.c">
@@ -168,6 +177,15 @@
       <Filter>Source Files\neuralnet</Filter>
     </ClCompile>
     <ClCompile Include="neuralnet.c">
+      <Filter>Source Files\neuralnet</Filter>
+    </ClCompile>
+    <ClCompile Include="info.c">
+      <Filter>Source Files\info</Filter>
+    </ClCompile>
+    <ClCompile Include="load.c">
+      <Filter>Source Files\info</Filter>
+    </ClCompile>
+    <ClCompile Include="normT.c">
       <Filter>Source Files\neuralnet</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "date.h"
-#include "string.h"
 #include "minMax.h"
 #include "listTad.h"
 
@@ -11,3 +10,4 @@ int dateCmp(Date d1, Date d2);
 int equalsStringIgnoreCase(char str1[], char str2[]);
 int calculateAge(Date date);
 void getMinMax(PtList list, int listSize, MinMax* minMax);
+void showNoDataWarning();
