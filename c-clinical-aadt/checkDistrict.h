@@ -1,5 +1,8 @@
 #pragma once
 
 #include "listTad.h"
+#include "mapTad.h"
 
-void showCheckDistrictMenu(PtList list);
+void printCheckDistrict(PtMap districtsAvg, String district);
+void showCheckDistrictMenu(PtMap districtsAvg);
+void initializeCheckDistrict(PtList patients);

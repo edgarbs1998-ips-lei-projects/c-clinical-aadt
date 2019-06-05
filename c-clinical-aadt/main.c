@@ -71,16 +71,16 @@ int main(int argc, char** argv) {
 			showSortMenu(patientList);
 		}
 		else if (equalsStringIgnoreCase(command, "AVG")) {
-			averageClinicalData(patientList);
+			printAverageClinicalData(patientList);
 		}
 		else if (equalsStringIgnoreCase(command, "NORM")) {
 			printNormalizeClinicalData(patientList);
 		}
 		else if (equalsStringIgnoreCase(command, "QUEUE")) {
-			queuePatients(patientList);
+			initializeQueue(patientList);
 		}
 		else if (equalsStringIgnoreCase(command, "CHECKDISTRICT")) {
-			showCheckDistrictMenu(patientList);
+			initializeCheckDistrict(patientList);
 		}
 		else if (equalsStringIgnoreCase(command, "LOADT")) {
 			loadTrainData(neuralNetList);
@@ -89,10 +89,10 @@ int main(int argc, char** argv) {
 			printNormalizeClinicalDataNeuralNet(neuralNetList);
 		}
 		else if (equalsStringIgnoreCase(command, "NEURALNET")) {
-			showNeuralnetMenu(patientList, neuralNetList);
+			initializeNeuralnet(patientList, neuralNetList);
 		}
 		else {
-			printf("\nComando não encontrado.\n\n");
+			printf("\n\nComando não encontrado.\n\n");
 			system("pause");
 		}
 	}

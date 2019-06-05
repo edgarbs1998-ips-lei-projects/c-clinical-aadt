@@ -10,6 +10,7 @@
 #include "norm.h"
 #include "normT.h"
 #include "clinicalData.h"
+#include "utils.h"
 
 void initializeWeights(double weightIH[][HIDDEN_LAYER_SIZE+1], double deltaWeightIH[][HIDDEN_LAYER_SIZE+1], double wightHO[][OUTPUT_LAYER_SIZE+1], double deltaWeightHO[][OUTPUT_LAYER_SIZE+1]) {
 	// Initialize weightIH and deltaWeightIH
@@ -169,25 +170,19 @@ void printOutout(PtList output) {
 }
 
 //void train() {
+//	if (listIsEmpty(ptListTrain) == 1) {
+//		showNoTrainDataWarning();
+//		return;
+//	}
 //
+//  PtList auxPatientsTrain = copyList(patientsTrain);
+//	PtList normTrain = normalizeClinicalData(auxPatientsTrain, NEURAL_NET_NORM_K);
+//
+//  listDestroy(&auxPatientsTrain);
 //}
 
 // Neuralnet menu
-void showNeuralnetMenu(PtList ptList, PtList ptListTrain) {
-	if (listIsEmpty(ptList) == 1 || listIsEmpty(ptListTrain) == 1) {
-		showNoDataWarning();
-		return;
-	}
-
-	PtList normPatients = normalizeClinicalData(ptList, NEURAL_NET_NORM_K);
-	PtList normTrain = normalizeClinicalData(ptListTrain, NEURAL_NET_NORM_K);
-	PtList outputList = listCreate(NULL);
-
-	double weightIH[INPUT_LAYER_SIZE+1][HIDDEN_LAYER_SIZE+1], deltaWeightIH[INPUT_LAYER_SIZE+1][HIDDEN_LAYER_SIZE+1];
-	double weightHO[HIDDEN_LAYER_SIZE+1][OUTPUT_LAYER_SIZE +1], deltaWeightHO[HIDDEN_LAYER_SIZE +1][OUTPUT_LAYER_SIZE +1];
-
-	initializeWeights(&weightIH, &deltaWeightIH, &weightHO, &deltaWeightHO);
-
+void showNeuralnetMenu(PtList normPatients, PtList patientsTrain, PtList outputList, double weightIH[][HIDDEN_LAYER_SIZE + 1], double weightHO[][OUTPUT_LAYER_SIZE + 1]) {
 	/* interpretador de comandos */
 	char option;
 	int exit = 0;
@@ -198,9 +193,9 @@ void showNeuralnetMenu(PtList ptList, PtList ptListTrain) {
 		printf("\n===================================================================================");
 		printf("\n                                     NEURALNET                                     ");
 		printf("\n===================================================================================");
-		printf("\n1 - Classifica e imprime os pacientes em 4 grupos de doenças com base nos seus dados clínicos.");
-		printf("\n2 - Treina a rede neuronal com os valores carregados através do comando LOADT.");
-		printf("\n0 - Volta ao menu anterior, removendo da memória os dados referentes as redes neuronais.");
+		printf("\n1 - Classifica e imprime os pacientes em 4 grupos de doenças com base nos seus dados clínicos");
+		printf("\n2 - Treina a rede neuronal com os valores carregados através do comando LOADT");
+		printf("\n0 - Volta ao menu anterior, removendo da memória os dados referentes as redes neuronais");
 		printf("\n\n");
 
 		// Aguarda que o utilizador pressione um carater, ignora a tecla ENTER que causava comportamentos indesejados
@@ -223,8 +218,26 @@ void showNeuralnetMenu(PtList ptList, PtList ptListTrain) {
 			break;
 		}
 	} while (exit == 0);
+}
+
+// Neuralnet initializer
+void initializeNeuralnet(PtList patients, PtList patientsTrain) {
+	if (listIsEmpty(patients) == 1) {
+		showNoDataWarning();
+		return;
+	}
+
+	PtList auxPatients = copyList(patients);
+	PtList normPatients = normalizeClinicalData(auxPatients, NEURAL_NET_NORM_K);
+	PtList outputList = listCreate(NULL);
+
+	double weightIH[INPUT_LAYER_SIZE + 1][HIDDEN_LAYER_SIZE + 1], deltaWeightIH[INPUT_LAYER_SIZE + 1][HIDDEN_LAYER_SIZE + 1];
+	double weightHO[HIDDEN_LAYER_SIZE + 1][OUTPUT_LAYER_SIZE + 1], deltaWeightHO[HIDDEN_LAYER_SIZE + 1][OUTPUT_LAYER_SIZE + 1];
+
+	initializeWeights(&weightIH, &deltaWeightIH, &weightHO, &deltaWeightHO);
+
+	showNeuralnetMenu(normPatients, patientsTrain, outputList, weightIH, weightHO);
 
 	// Libertar memória
-	listDestroy(&normPatients);
-	listDestroy(&normTrain);
+	listDestroy(&auxPatients);
 }

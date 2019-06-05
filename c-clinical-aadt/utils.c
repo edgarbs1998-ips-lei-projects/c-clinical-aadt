@@ -24,6 +24,27 @@ char** split(char* string, int nFields, const char* delim) {
 	return tokens;
 }
 
+int equalsStringIgnoreCase(char str1[], char str2[]) {
+	char* lstr1, * lstr2;
+	_strlwr_s(lstr1 = _strdup(str1), strlen(str1) + 1);
+	_strlwr_s(lstr2 = _strdup(str2), strlen(str2) + 1);
+	return (strcmp(lstr1, lstr2) == 0);
+}
+
+PtList copyList(PtList list) {
+	int size;
+	listSize(list, &size);
+	PtList auxList = listCreate(size);
+
+	ListElem elem;
+	for (int i = 0; i < size; ++i) {
+		listGet(list, i, &elem);
+		listAdd(auxList, i, elem);
+	}
+
+	return auxList;
+}
+
 Date dateCreate(int day, int month, int year) {
 	Date date;
 	date.day = day;
@@ -40,13 +61,6 @@ int dateCmp(Date d1, Date d2) {
 		return 1;
 	else return -1;
 
-}
-
-int equalsStringIgnoreCase(char str1[], char str2[]) {
-	char* lstr1, * lstr2;
-	_strlwr_s(lstr1 = _strdup(str1), strlen(str1) + 1);
-	_strlwr_s(lstr2 = _strdup(str2), strlen(str2) + 1);
-	return (strcmp(lstr1, lstr2) == 0);
 }
 
 int calculateAge(Date date) {
@@ -139,6 +153,16 @@ void getMinMax(PtList list, int listSize, MinMax *minMax) {
 }
 
 void showNoDataWarning() {
-	printf("\nSEM DADOS CARREGADOS\n\n");
+	printf("\n\nSEM DADOS CARREGADOS\n\n");
 	system("pause");
+}
+
+void showNoTrainDataWarning() {
+	printf("\nSEM DADOS DE TREINO CARREGADOS\n\n");
+	system("pause");
+}
+
+void printPatientHeader() {
+	printf("\n%15s %s %s %s %37s %12s %s %9s %s %s\n",
+		"Indice", "BirthDate", "Sex", "Hospital", "District", "Age", "Bmi", "Glicose", "Insulin", "Mpc1");
 }

@@ -13,19 +13,13 @@ void normalize(float* x, float max, float min, float k) {
 PtList normalizeClinicalData(PtList list, int k) {
 	int size;
 	listSize(list, &size);
-	PtList auxList = listCreate(size);
-
 	ListElem elem;
-	for (int i = 0; i < size; ++i) {
-		listGet(list, i, &elem);
-		listAdd(auxList, i, elem);
-	}
 
 	MinMax minMax;
-	getMinMax(auxList, size, &minMax);
+	getMinMax(list, size, &minMax);
 
 	for (int i = 0; i < size; ++i) {
-		listGet(auxList, i, &elem);
+		listGet(list, i, &elem);
 
 		normalize(&(elem.clinicalData.age), minMax.maxAge, minMax.minAge, k);
 		normalize(&(elem.clinicalData.bmi), minMax.maxBmi, minMax.minBmi, k);
@@ -33,11 +27,11 @@ PtList normalizeClinicalData(PtList list, int k) {
 		normalize(&(elem.clinicalData.insulin), minMax.maxInsuline, minMax.minInsuline, k);
 		normalize(&(elem.clinicalData.mcp1), minMax.maxMcp1, minMax.minMcp1, k);
 
-		listSet(auxList, i, elem, &elem);		
+		listSet(list, i, elem, &elem);
 		
 	}
 
-	return auxList;
+	return list;
 }
 
 void printNormalizedClinicalData(PtList list, int k) {
@@ -56,26 +50,29 @@ void printNormalizedClinicalData(PtList list, int k) {
 	system("pause");
 }
 
-void printNormalizeClinicalData(PtList list) {
-	if (listIsEmpty(list) == 1) {
+void printNormalizeClinicalData(PtList patients) {
+	if (listIsEmpty(patients) == 1) {
 		showNoDataWarning();
 		return;
 	}
 
+	// Initialize
+	PtList auxList = copyList(patients);
 	PtList normalizedClinicalData;
+
+	// Pede ao utilizador o valor de K
 	int k = 0;
 	String input;
 
-	// Pede ao utilizador o valor de K
-	printf("\nIntroduza o valor de k: ");
-	fgets(input, sizeof(input), stdin);
-	input[strlen(input) - 1] = '\0';
+	printf("\n\nIntroduza o valor de k: ");
+	gets(input, sizeof(input));
 
 	k = atoi(input);
 
-	normalizedClinicalData = normalizeClinicalData(list, k);
+	// Handle data
+	normalizedClinicalData = normalizeClinicalData(auxList, k);
 	printNormalizedClinicalData(normalizedClinicalData, k);
 
 	// Libertar memória
-	listDestroy(&normalizedClinicalData);
+	listDestroy(&auxList);
 }

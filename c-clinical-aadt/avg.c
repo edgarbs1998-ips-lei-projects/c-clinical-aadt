@@ -8,35 +8,18 @@
 #include "sort.h"
 #include "districtAvg.h"
 #include "calculateAvg.h"
+#include "utils.h"
 
-void averageClinicalData(PtList patients) {
-	int size;
-	listSize(patients, &size);
-	PtList auxList = listCreate(size);
-
-	ListElem elem;
-	for (int i = 0; i < size; ++i) {
-		listGet(patients, i, &elem);
-		listAdd(auxList, i, elem);
-	}
-
-	bubbleSortDistrict(auxList, size);
-
-	int districtsCount = getDistrictsCount(auxList, size);
-	PtMap mapDistrictAvg = mapCreate(districtsCount);
-	prepareDistrictAvg(auxList, size, mapDistrictAvg);
-
-	mapPrint(mapDistrictAvg);
-}
-
-PtMap averageClinicalDataMap(PtList list, int listSize) {
-	bubbleSortDistrict(list, listSize);
-
-	int districtsCount = getDistrictsCount(list, listSize);
-	PtMap districtsAvg = mapCreate(districtsCount);
-	prepareDistrictAvg(list, listSize, districtsAvg);
-
-	return districtsAvg;
+void calculateDistrictAvg(PtMap mapDistrictAvg, CalculateAvg* calculateAvg, String currentDistrict) {
+	DistrictAvg createDistrict = createDistrictAvg(
+		calculateAvg->sumAge / calculateAvg->countAge,
+		calculateAvg->sumBmi / calculateAvg->countBmi,
+		calculateAvg->sumGlucose / calculateAvg->countGlucose,
+		calculateAvg->sumInsulin / calculateAvg->countInsulin,
+		calculateAvg->sumMcp1 / calculateAvg->countMcp1
+	);
+	MapKey key = stringCodeCreate(currentDistrict);
+	mapPut(mapDistrictAvg, key, createDistrict);
 }
 
 int getDistrictsCount(PtList patients, int listSize) {
@@ -89,14 +72,35 @@ void prepareDistrictAvg(PtList patients, int listSize, PtMap mapDistrictAvg) {
 	calculateDistrictAvg(mapDistrictAvg, &calculateAvg, currentDistrict);
 }
 
-void calculateDistrictAvg(PtMap mapDistrictAvg, CalculateAvg* calculateAvg, String currentDistrict) {
-	DistrictAvg createDistrict = createDistrictAvg(
-		calculateAvg->sumAge / calculateAvg->countAge,
-		calculateAvg->sumBmi / calculateAvg->countBmi,
-		calculateAvg->sumGlucose / calculateAvg->countGlucose,
-		calculateAvg->sumInsulin / calculateAvg->countInsulin,
-		calculateAvg->sumMcp1 / calculateAvg->countMcp1
-	);
-	MapKey key = stringCodeCreate(currentDistrict);
-	mapPut(mapDistrictAvg, key, createDistrict);
+PtMap averageClinicalData(PtList patients) {
+	int size;
+	listSize(patients, &size);
+	bubbleSortDistrict(patients, size);
+
+	int districtsCount = getDistrictsCount(patients, size);
+	PtMap districtsAvg = mapCreate(districtsCount);
+	prepareDistrictAvg(patients, size, districtsAvg);
+
+	return districtsAvg;
+}
+
+void printAverageClinicalData(PtList patients) {
+	if (listIsEmpty(patients) == 1) {
+		showNoDataWarning();
+		return;
+	}
+
+	// Initialize
+	PtList auxList = copyList(patients);
+	PtMap mapDistrictAvg = averageClinicalData(auxList);
+
+	// Print
+	printf("\n\nDistrict                Age  Bmi Glucose Insulin MCP1\n");
+	mapPrint(mapDistrictAvg);
+	printf("\n");
+	system("pause");
+
+	// Libertar memória
+	listDestroy(&auxList);
+	mapDestroy(&mapDistrictAvg);
 }

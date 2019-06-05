@@ -9,4 +9,4 @@ void sortByHospital(PtList list);
 void bubbleSortHospital(PtList list, int listSize);
 void sortByDistrict(PtList list);
 void bubbleSortDistrict(PtList list, int listSize);
-void showSortMenu(PtList list);
+void showSortMenu(PtList patients);

@@ -227,7 +227,7 @@ void listPrint(PtList list) {
 		printf("LIST EMPTY \n");
 	else {
 		for (int rank = 0; rank < list->size; rank++) {
-			printf("Rank %d : \t", rank);
+			printf("At rank %3d: ", rank);
 			listElemPrint(list->elements[rank]);
 		}
 

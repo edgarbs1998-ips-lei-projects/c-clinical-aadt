@@ -13,3 +13,5 @@ void calculateDiseaseType(ListElem* elem);
 double sigmoide(double x);
 PtList compute(PtList normPatients, double weightIH[][HIDDEN_LAYER_SIZE + 1], double weightHO[][OUTPUT_LAYER_SIZE + 1]);
 void printOutout(PtList output);
+void showNeuralnetMenu(PtList normPatients, PtList patientsTrain, PtList outputList, double weightIH[][HIDDEN_LAYER_SIZE + 1], double weightHO[][OUTPUT_LAYER_SIZE + 1]);
+void initializeNeuralnet(PtList patients, PtList patientsTrain);

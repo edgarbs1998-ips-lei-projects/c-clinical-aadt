@@ -131,7 +131,7 @@ void loadTrainData(PtList patients) {
 	String filePatient, fileClinicalData;
 	struct stat fileStat;
 
-	printf("\nEnter the path of the Patient Train file: ");
+	printf("\n\nEnter the path of the Patient Train file: ");
 	gets(filePatient, sizeof(filePatient));
 
 	if (stat(filePatient, &fileStat) != 0) {

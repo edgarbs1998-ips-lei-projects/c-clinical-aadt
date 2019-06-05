@@ -4,6 +4,7 @@
 
 #include "info.h"
 #include "listTad.h"
+#include "utils.h"
 
 // Clear data
 void clearData(PtList list) {
@@ -16,7 +17,7 @@ void clearData(PtList list) {
 	listSize(list, &size);
 	listClear(list);
 
-	printf("\nForam apagados %d registos de pacientes\n\n", size);
+	printf("\n\nForam apagados %d registos de pacientes\n\n", size);
 	system("pause");
 }
 
@@ -28,8 +29,7 @@ void showData(PtList list) {
 	}
 
 	printf("\n");
-	printf("%18s %s %s %s %37s %12s %s %9s %s %s\n",
-		"Indice", "BirthDate", "Sex", "Hospital", "District", "Age", "Bmi", "Glicose", "Insulin", "Mpc1");
+	printPatientHeader();
 	listPrint(list);
 
 	printf("\n");

@@ -15,15 +15,20 @@ PtList getNormalizeClinicalDataNeuralNet(PtList list) {
 	return normalizedClinicalData;
 }
 
-void printNormalizeClinicalDataNeuralNet(PtList list) {
-	if (listIsEmpty(list) == 1) {
-		showNoDataWarning();
+void printNormalizeClinicalDataNeuralNet(PtList patientsTrain) {
+	if (listIsEmpty(patientsTrain) == 1) {
+		showNoTrainDataWarning();
 		return;
 	}
 
-	PtList normalizedClinicalData = getNormalizeClinicalDataNeuralNet(list);
+	// Initialize
+	PtList auxList = copyList(patientsTrain);
+	PtList normalizedClinicalData;
+
+	// Handle data
+	normalizedClinicalData = getNormalizeClinicalDataNeuralNet(auxList);
 	printNormalizedClinicalData(normalizedClinicalData, NEURAL_NET_NORM_K);
 
 	// Libertar memória
-	listDestroy(&normalizedClinicalData);
+	listDestroy(&auxList);
 }
