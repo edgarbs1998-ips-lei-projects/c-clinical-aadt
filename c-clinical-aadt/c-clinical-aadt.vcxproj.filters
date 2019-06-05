@@ -120,6 +120,9 @@
     <ClInclude Include="normT.h">
       <Filter>Header Files\neuralnet</Filter>
     </ClInclude>
+    <ClInclude Include="avgt.h">
+      <Filter>Header Files\neuralnet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c">
@@ -186,6 +189,9 @@
       <Filter>Source Files\info</Filter>
     </ClCompile>
     <ClCompile Include="normT.c">
+      <Filter>Source Files\neuralnet</Filter>
+    </ClCompile>
+    <ClCompile Include="avgt.c">
       <Filter>Source Files\neuralnet</Filter>
     </ClCompile>
   </ItemGroup>

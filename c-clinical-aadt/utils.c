@@ -18,7 +18,6 @@ char** split(char* string, int nFields, const char* delim) {
 	while (token) {
 		tokens[index++] = token;
 		token = strtok_s(NULL, delim, &next_token);
-
 	}
 
 	return tokens;
