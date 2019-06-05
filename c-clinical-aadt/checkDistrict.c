@@ -17,12 +17,12 @@ void printCheckDistrict(PtMap districtsAvg, String district) {
 	if (mapContains(districtsAvg, key) == 1) {
 		mapGet(districtsAvg, key, &districtAvg);
 
-		printf("\nDistrict        Age  Bmi Glucose Insulin MCP1\n");
+		printf("\n\nDistrict        Age  Bmi Glucose Insulin MCP1\n");
 		mapKeyPrint(key);
 		mapValuePrint(districtAvg);
 	}
 	else {
-		printf("\nThe input district name does not exists...\n");
+		printf("\n\nThe input district name does not exists...\n");
 	}
 
 	printf("\n");
