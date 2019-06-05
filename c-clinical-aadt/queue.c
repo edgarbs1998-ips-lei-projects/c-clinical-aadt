@@ -17,7 +17,7 @@ void getDataAvg(PtList list, int listSize, QueueAvg *queueAvg) {
 	int minAge = calculateAge(minMax.maxBirthDate);
 	int maxAge = calculateAge(minMax.minBirthDate);
 
-	queueAvg->avgAge = (minMax.minAge + minMax.maxAge) / 2.0;
+	queueAvg->avgAge = (minAge + maxAge) / 2.0;
 	queueAvg->avgBmi = (minMax.minBmi + minMax.maxBmi) / 2.0;
 	queueAvg->avgGlucose = (minMax.minGlucose + minMax.maxGlucose) / 2.0;
 	queueAvg->avgInsuline = (minMax.minInsuline + minMax.maxInsuline) / 2.0;
@@ -46,6 +46,12 @@ void creteQueuePatients(PtQueue ptQueue, PtList patients, int listSize, QueueAvg
 }
 
 void nextQueueCommand(PtQueue ptQueue) {
+	if (queueIsEmpty(ptQueue) == 1) {
+		printf("\n\nNão existem mais elementos na fila...\n\n");
+		system("pause");
+		return;
+	}
+
 	QueueElem elem;
 	queueDequeue(ptQueue, &elem);
 
@@ -67,12 +73,12 @@ void showQueueMenu(PtQueue patientsQueue) {
 		printf("\n===================================================================================");
 		printf("\n                                       QUEUE                                       ");
 		printf("\n===================================================================================");
-		printf("\nnext - Retirar um elemento da fila e mostra a informaï¿½ï¿½o do paciente respetivo.");
-		printf("\nstop - Termina este processo de repetiï¿½ï¿½o.");
+		printf("\nnext - Retirar um elemento da fila e mostra a informação do paciente respetivo.");
+		printf("\nstop - Termina este processo de repetição.");
 		printf("\n\nCOMMAND> ");
 
 		fgets(command, sizeof(command), stdin);
-		/* descartar 'newline'. Utilizar esta tï¿½cnica sempre que for lida uma
+		/* descartar 'newline'. Utilizar esta técnica sempre que for lida uma
 		* string para ser utilizada, e.g., nome de ficheiro, chave, etc.. */
 		command[strlen(command) - 1] = '\0';
 
@@ -83,7 +89,7 @@ void showQueueMenu(PtQueue patientsQueue) {
 			break;
 		}
 		else {
-			printf("\n\nComando nï¿½o encontrado.\n\n");
+			printf("\n\nComando não encontrado.\n\n");
 			system("pause");
 		}
 	} while (1);
@@ -107,6 +113,6 @@ void initializeQueue(PtList patients) {
 
 	showQueueMenu(patientsQueue);
 
-	// Libertar memï¿½ria
+	// Libertar memória
 	queueDestroy(&patientsQueue);
 }
