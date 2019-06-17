@@ -113,8 +113,8 @@ void printCommandsMenu() {
 	printf("\n                          PROJECT: Patients and Clinical Data                      ");
 	printf("\n===================================================================================");
 	printf("\nA. Info about Patients (LOAD, SHOW, CLEAR).");
-	printf("\nB. Aggregated info about patients and clinical data (SORT, AVG, AVGT, NORM, QUEUE, CHECKDISTRICT).");
-	printf("\nC. Advanced indicator (LOADT, NORMT, NEURALNET)");
+	printf("\nB. Aggregated info about patients and clinical data (SORT, AVG, NORM, QUEUE, CHECKDISTRICT).");
+	printf("\nC. Advanced indicator (LOADT, NORMT, AVGT, NEURALNET)");
 	printf("\nD. Exit (QUIT)\n\n");
 	printf("COMMAND> ");
 }
